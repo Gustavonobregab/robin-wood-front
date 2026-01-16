@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npx shadcn@latest init -y)",
+      "Bash(npx shadcn@latest init --defaults)",
+      "Bash(npx shadcn:*)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(pkill:*)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebSearch",
+      "Bash(ls:*)"
+    ]
+  }
+}
