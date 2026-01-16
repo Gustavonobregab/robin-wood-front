@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const DemoSection = () => {
   return (
     <section className="py-24 bg-white border-b-2 border-ink">
@@ -11,10 +13,11 @@ export const DemoSection = () => {
           
           {/* BEFORE CARD */}
           <div className="relative group">
-            <div className="absolute -top-3 -left-3 bg-danger-pink border-2 border-ink px-3 py-1 font-mono font-bold text-xs shadow-hard-sm z-10 -rotate-3">
+            {/* Badge Rosa - Também aumentei o z-index por garantia */}
+            <div className="absolute -top-3 -left-3 bg-danger-pink border-2 border-ink px-3 py-1 font-mono font-bold text-xs shadow-hard-sm z-50 -rotate-3">
               THE SHERIFF'S PRICE
             </div>
-            <div className="bg-parchment border-2 border-ink rounded-xl p-6 shadow-hard h-full font-mono text-xs md:text-sm opacity-60 blur-[0.5px] group-hover:blur-0 transition-all">
+            <div className="bg-parchment border-2 border-ink rounded-xl p-6 shadow-hard h-full font-mono text-xs md:text-sm opacity-60 blur-[0.5px] group-hover:blur-0 transition-all relative">
               <div className="text-gray-500 mb-2">// Original Payload (Fat)</div>
               <div className="space-y-1">
                 <p>{"{"}</p>
@@ -34,9 +37,10 @@ export const DemoSection = () => {
             🪓
           </div>
 
-          {/* AFTER CARD */}
+          {/* AFTER CARD (Onde estava o problema) */}
           <div className="relative">
-            <div className="absolute -top-3 -right-3 bg-robin-green border-2 border-ink px-3 py-1 font-mono font-bold text-xs shadow-hard-sm z-10 rotate-3">
+            {/* CORREÇÃO AQUI: z-50 e garantindo a cor hex */}
+            <div className="absolute -top-3 -right-3 bg-[#00C16C] border-2 border-ink px-3 py-1 font-mono font-bold text-xs shadow-hard-sm z-50 rotate-3">
               THE OUTLAW'S PRICE
             </div>
             <div className="bg-ink text-parchment border-2 border-ink rounded-xl p-6 shadow-hard-xl h-full font-mono text-xs md:text-sm relative overflow-hidden">

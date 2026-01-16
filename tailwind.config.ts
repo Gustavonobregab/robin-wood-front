@@ -98,18 +98,23 @@ const config: Config = {
         'hard-xl': '8px 8px 0px 0px #121212',
       },
 
-      // --- NOVAS ANIMAÇÕES (MARQUEE) ---
+      // --- NOVAS ANIMAÇÕES ---
       animation: {
         marquee: 'marquee 25s linear infinite',
-        "accordion-down": "accordion-down 0.2s ease-out", // Mantendo shadcn (se houver)
-        "accordion-up": "accordion-up 0.2s ease-out",     // Mantendo shadcn (se houver)
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        
+        // ADIÇÃO: Animações do Hero (Flechas e Flutuação)
+        float: 'float 6s ease-in-out infinite',
+        'arrow-fly-1': 'flyRight 15s linear infinite',
+        'arrow-fly-2': 'flyRight 20s linear infinite',
+        'arrow-fly-3': 'flyRight 25s linear infinite',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
         },
-        // Mantendo keyframes do shadcn caso você use accordion
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -118,8 +123,20 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-      }
-    }
+
+        // --- CORREÇÃO AQUI ---
+        float: {
+          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+          '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+        },
+        flyRight: {
+          // Começa na posição original (que já é fora da tela na esquerda)
+          '0%': { transform: 'translateX(0) translateY(0)' },
+          
+          // Vai até 150% da largura da tela (garante que cruze tudo + sobra)
+          '100%': { transform: 'translateX(150vw) translateY(100px)' }, 
+        }
+      }    }
   },
   plugins: [require("tailwindcss-animate")],
 }
