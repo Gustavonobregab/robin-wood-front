@@ -1,3 +1,6 @@
+/* 1. IMPORTANDO AS FONTES (Fraunces, Space Grotesk, Space Mono) */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;700;900&family=Space+Grotesk:wght@300;500;700&family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,10 +30,20 @@
   }
 
   * {
+    /* Garante que bordas padrão usem a cor definida, mas permite override */
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    /* ADAPTAÇÃO: Usando as cores e fontes do tema RobinWood por padrão */
+    /* bg-parchment = Creme | text-ink = Preto | font-sans = Space Grotesk */
+    @apply bg-parchment text-ink font-sans antialiased;
   }
+}
+
+/* 2. CLASSE UTILITÁRIA PARA O FUNDO PONTILHADO */
+.bg-dots {
+  background-image: radial-gradient(#121212 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.05;
 }
