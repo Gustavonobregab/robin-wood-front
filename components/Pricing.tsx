@@ -25,27 +25,27 @@ export const Pricing = () => {
 
           {/* PRO TIER (Merry Men) */}
           {/* Adicionei 'relative' e garanto que o badge esteja visível */}
-          <div className="bg-ink text-parchment border-2 border-ink w-full md:w-96 p-8 shadow-hard-xl text-left relative z-10 md:-translate-y-6">
+          <div className="bg-robin-neon text-ink border-2 border-ink w-full md:w-96 p-8 shadow-hard-xl text-left relative z-10 md:-translate-y-6" style={{ backgroundColor: '#00C16C' }}>
             
             {/* CORREÇÃO DO BADGE: z-50 para ficar na frente de tudo */}
             <div className="absolute -top-4 left-0 right-0 flex justify-center z-50">
-              <span className="bg-robin-neon text-ink border-2 border-ink px-4 py-1 font-mono font-bold text-xs shadow-hard-sm uppercase tracking-wider bg-[#00C16C]">
+              <span className="bg-parchment text-ink border-2 border-ink px-4 py-1 font-mono font-bold text-xs shadow-hard-sm uppercase tracking-wider">
                 Most Wanted
               </span>
             </div>
 
-            <div className="border-b-2 border-dashed border-gray-700 pb-4 mb-4">
-              <h3 className="font-serif font-bold text-3xl text-sheriff-gold">Merry Men</h3>
-              <p className="font-mono text-xs text-gray-400">For startups & heavy hitters</p>
+            <div className="border-b-2 border-dashed border-ink pb-4 mb-4">
+              <h3 className="font-serif font-bold text-3xl text-ink">Merry Men</h3>
+              <p className="font-mono text-xs text-ink/70">For startups & heavy hitters</p>
             </div>
-            <ul className="font-mono text-sm space-y-3 mb-8 text-gray-300">
+            <ul className="font-mono text-sm space-y-3 mb-8 text-ink/80">
               <li>✅ 1,000min audio/mo</li>
               <li>✅ 10M chars text</li>
               <li>✅ High-Speed REST API</li>
               <li>✅ Priority "Heist" Support</li>
             </ul>
-            <div className="text-5xl font-black font-serif mb-6">$29 <span className="text-sm font-normal text-gray-400">/mo</span></div>
-            <Button variant="primary" className="w-full font-bold">Start the Rebellion</Button>
+            <div className="text-5xl font-black font-serif mb-6 text-ink">$29 <span className="text-sm font-normal text-ink/70">/mo</span></div>
+            <Button variant="primary" className="w-full font-bold bg-robin-red-600 text-parchment hover:bg-robin-red-700">Start the Rebellion</Button>
           </div>
 
         </div>

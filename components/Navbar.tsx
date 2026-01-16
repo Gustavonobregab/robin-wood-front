@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from './ui/Button';
 
 export const Navbar = () => {
@@ -6,9 +7,13 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-10 h-10 bg-robin-green border-2 border-ink rounded-full flex items-center justify-center font-serif font-black text-xl group-hover:rotate-12 transition-transform">
-            R
-          </div>
+          <Image 
+            src="/robin-logo.png" 
+            alt="Robin Wood Logo" 
+            width={40} 
+            height={40}
+            className="group-hover:rotate-12 transition-transform"
+          />
           <span className="font-serif font-black text-2xl tracking-tighter">RobinWood</span>
         </div>
 

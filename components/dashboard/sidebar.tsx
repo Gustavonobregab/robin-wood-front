@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { cn } from "@/components/ui/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -9,7 +10,6 @@ import {
   Key,
   Building2,
   CreditCard,
-  TreePine,
   Menu,
   X,
 } from "lucide-react"
@@ -55,9 +55,12 @@ export function Sidebar() {
         <div className="flex h-full flex-col bg-gradient-to-b from-robin-green-800 to-robin-green-900 text-white">
           {/* Logo */}
           <div className="flex h-20 items-center justify-center gap-3 border-b border-robin-green-700/50">
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-robin-red-600">
-              <TreePine className="h-7 w-7 text-white" />
-            </div>
+            <Image 
+              src="/robin-logo.png" 
+              alt="Robin Wood Logo" 
+              width={48} 
+              height={48}
+            />
             <div>
               <h1 className="text-xl font-bold">Robin Wood</h1>
               <p className="text-xs text-robin-green-300">Dashboard</p>

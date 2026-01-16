@@ -17,8 +17,8 @@ const FeatureCard = ({ icon, title, desc, color }: FeatureCardProps) => (
 
 export const Features = () => {
   return (
-    // CORREÇÃO: Usando bg-[#00C16C] (Verde Robin) diretamente para garantir a cor
-    <section className="py-24 px-6 bg-[#00C16C] border-y-2 border-ink relative">
+    // CORREÇÃO: Usando bg-robin-red-600 (vermelho) 
+    <section className="py-24 px-6 bg-robin-red-600 border-y-2 border-ink relative">
       
       {/* Label decorativa no topo */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-ink text-parchment px-4 py-1 font-mono text-xs font-bold border-2 border-parchment rotate-2 shadow-hard-sm z-10">
@@ -28,19 +28,19 @@ export const Features = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8">
           <FeatureCard 
-            color="bg-danger-pink" 
+            color="bg-parchment" 
             icon="✂️"
             title="Silence Slaughter"
             desc="We detect dead air and pauses in audio files and chop them out. Whisper API charges by the second. Don't pay for silence."
           />
           <FeatureCard 
-            color="bg-sheriff-gold" 
+            color="bg-parchment" 
             icon="🏎️"
             title="Smart Speedup"
             desc="Time-stretch audio without the 'chipmunk effect'. Keep the intelligibility, cut the duration (and the bill) in half."
           />
           <FeatureCard 
-            color="bg-white" 
+            color="bg-parchment" 
             icon="📜"
             title="Text Shredder"
             desc="We replace polite corporate words with efficient synonyms. JSON minification on steroids. Your prompt, but skinnier."
