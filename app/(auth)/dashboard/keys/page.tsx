@@ -82,12 +82,12 @@ export default function KeysPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">API Keys</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-3xl font-bold font-serif text-ink">API Keys</h1>
+          <p className="text-ink/80 mt-1 font-sans">
             Manage your API keys for authentication.
           </p>
         </div>
-        <Button className="bg-robin-green-600 hover:bg-robin-green-700 text-white">
+        <Button variant="primary">
           <Plus className="h-4 w-4 mr-2" />
           Create New Key
         </Button>
@@ -95,40 +95,48 @@ export default function KeysPage() {
 
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="border-slate-200">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Active Keys</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            <CardTitle className="text-sm font-medium text-ink">Active Keys</CardTitle>
+            <div className="rounded-none border-2 border-ink bg-robin-neon p-2" style={{ backgroundColor: '#00C16C' }}>
+              <CheckCircle2 className="h-4 w-4 text-parchment" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">3</div>
+            <div className="text-2xl font-bold font-serif text-ink">3</div>
           </CardContent>
         </Card>
-        <Card className="border-slate-200">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Total Requests</CardTitle>
-            <Key className="h-4 w-4 text-robin-green-600" />
+            <CardTitle className="text-sm font-medium text-ink">Total Requests</CardTitle>
+            <div className="rounded-none border-2 border-ink bg-robin-red-600 p-2" style={{ backgroundColor: '#DC2626' }}>
+              <Key className="h-4 w-4 text-parchment" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">1.7M</div>
+            <div className="text-2xl font-bold font-serif text-ink">1.7M</div>
           </CardContent>
         </Card>
-        <Card className="border-slate-200">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-slate-600">Revoked Keys</CardTitle>
-            <AlertCircle className="h-4 w-4 text-slate-400" />
+            <CardTitle className="text-sm font-medium text-ink">Revoked Keys</CardTitle>
+            <div className="rounded-none border-2 border-ink bg-robin-red-600 p-2" style={{ backgroundColor: '#DC2626' }}>
+              <AlertCircle className="h-4 w-4 text-parchment" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-slate-800">1</div>
+            <div className="text-2xl font-bold font-serif text-ink">1</div>
           </CardContent>
         </Card>
       </div>
 
       {/* API Keys List */}
-      <Card className="border-slate-200">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-slate-800 flex items-center gap-2">
-            <Key className="h-5 w-5 text-robin-green-600" />
+          <CardTitle className="text-ink flex items-center gap-2">
+            <div className="rounded-none border-2 border-ink bg-robin-neon p-1.5" style={{ backgroundColor: '#00C16C' }}>
+              <Key className="h-4 w-4 text-parchment" />
+            </div>
             Your API Keys
           </CardTitle>
           <CardDescription>
@@ -140,35 +148,36 @@ export default function KeysPage() {
             {apiKeys.map((key) => (
               <div
                 key={key.id}
-                className={`p-4 rounded-lg border ${
+                className={`p-4 rounded-none border-2 border-ink ${
                   key.status === "revoked"
-                    ? "bg-slate-50 border-slate-200 opacity-60"
-                    : "bg-white border-slate-200 hover:border-robin-green-300"
-                } transition-colors`}
+                    ? "bg-parchment opacity-60"
+                    : "bg-parchment"
+                }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <h3 className="font-semibold text-slate-800">{key.name}</h3>
+                      <h3 className="font-semibold font-serif text-ink">{key.name}</h3>
                       <span
-                        className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                        className={`px-2 py-0.5 rounded-none border-2 border-ink text-xs font-medium font-mono ${
                           key.status === "active"
-                            ? "bg-emerald-100 text-emerald-700"
-                            : "bg-slate-100 text-slate-500"
+                            ? "bg-robin-neon text-ink"
+                            : "bg-parchment text-ink/70"
                         }`}
+                        style={key.status === "active" ? { backgroundColor: '#00C16C' } : {}}
                       >
                         {key.status}
                       </span>
                     </div>
                     <div className="mt-2 flex items-center gap-2">
-                      <code className="px-3 py-1.5 bg-slate-100 rounded-md text-sm font-mono text-slate-700">
+                      <code className="px-3 py-1.5 bg-parchment border-2 border-ink rounded-none text-sm font-mono text-ink">
                         {visibleKeys.has(key.id)
                           ? `${key.prefix}sk_xxxxxxxxxxxx${key.lastChars}`
                           : `${key.prefix}sk_••••••••••••${key.lastChars}`}
                       </code>
                       <button
                         onClick={() => toggleKeyVisibility(key.id)}
-                        className="p-1.5 text-slate-400 hover:text-slate-600 transition-colors"
+                        className="p-1.5 text-ink/70"
                       >
                         {visibleKeys.has(key.id) ? (
                           <EyeOff className="h-4 w-4" />
@@ -178,16 +187,16 @@ export default function KeysPage() {
                       </button>
                       <button
                         onClick={() => copyToClipboard(key.id)}
-                        className="p-1.5 text-slate-400 hover:text-slate-600 transition-colors"
+                        className="p-1.5 text-ink/70"
                       >
                         {copiedKey === key.id ? (
-                          <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                          <CheckCircle2 className="h-4 w-4 text-robin-neon" style={{ color: '#00C16C' }} />
                         ) : (
                           <Copy className="h-4 w-4" />
                         )}
                       </button>
                     </div>
-                    <div className="mt-3 flex items-center gap-6 text-sm text-slate-500">
+                    <div className="mt-3 flex items-center gap-6 text-sm text-ink/80 font-mono">
                       <span className="flex items-center gap-1">
                         <Clock className="h-3.5 w-3.5" />
                         Created {key.createdAt}
@@ -198,11 +207,10 @@ export default function KeysPage() {
                   </div>
                   {key.status === "active" && (
                     <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-rose-600 hover:text-rose-700 hover:bg-rose-50"
+                      variant="outline"
+                      className="bg-robin-red-600 text-parchment border-ink"
+                      style={{ backgroundColor: '#DC2626' }}
                     >
-                      <Trash2 className="h-4 w-4 mr-1" />
                       Revoke
                     </Button>
                   )}

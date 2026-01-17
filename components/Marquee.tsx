@@ -10,8 +10,8 @@ export const Marquee = () => {
   ];
 
   return (
-    <div className="w-full bg-sheriff-gold border-y-2 border-ink py-4 overflow-hidden flex">
-      <div className="animate-marquee whitespace-nowrap flex gap-12 font-mono font-bold text-xl uppercase tracking-widest items-center">
+    <div className="w-full bg-robin-red-600 border-y-2 border-ink py-4 overflow-hidden flex">
+      <div className="animate-marquee whitespace-nowrap flex gap-12 font-mono font-bold text-xl uppercase tracking-widest items-center text-ink">
         {[...items, ...items, ...items].map((item, i) => (
           <div key={i} className="flex items-center gap-4">
             <span>{item}</span>

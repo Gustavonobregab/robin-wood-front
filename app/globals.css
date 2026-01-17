@@ -28,22 +28,4 @@
     --ring: 142 76% 36%;
     --radius: 0.5rem;
   }
-
-  * {
-    /* Garante que bordas padrão usem a cor definida, mas permite override */
-    @apply border-border;
-  }
-
-  body {
-    /* ADAPTAÇÃO: Usando as cores e fontes do tema RobinWood por padrão */
-    /* bg-parchment = Creme | text-ink = Preto | font-sans = Space Grotesk */
-    @apply bg-parchment text-ink font-sans antialiased;
-  }
-}
-
-/* 2. CLASSE UTILITÁRIA PARA O FUNDO PONTILHADO */
-.bg-dots {
-  background-image: radial-gradient(#121212 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.05;
 }

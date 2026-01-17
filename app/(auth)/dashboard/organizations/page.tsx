@@ -55,22 +55,22 @@ const teamMembers = [
 const getRoleIcon = (role: string) => {
   switch (role) {
     case "owner":
-      return <Crown className="h-3.5 w-3.5 text-amber-500" />
+      return <Crown className="h-3.5 w-3.5 text-robin-red-600" />
     case "admin":
-      return <Shield className="h-3.5 w-3.5 text-robin-green-600" />
+      return <Shield className="h-3.5 w-3.5 text-robin-neon" style={{ color: '#00C16C' }} />
     default:
-      return <User className="h-3.5 w-3.5 text-slate-400" />
+      return <User className="h-3.5 w-3.5 text-ink/70" />
   }
 }
 
 const getRoleBadge = (role: string) => {
   switch (role) {
     case "owner":
-      return "bg-amber-100 text-amber-700"
+      return "bg-parchment text-ink border-2 border-ink"
     case "admin":
-      return "bg-robin-green-100 text-robin-green-700"
+      return "bg-robin-neon text-ink border-2 border-ink"
     default:
-      return "bg-slate-100 text-slate-600"
+      return "bg-parchment text-ink/70 border-2 border-ink"
   }
 }
 
@@ -80,13 +80,12 @@ export default function OrganizationsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">Organizations</h1>
-          <p className="text-slate-500 mt-1">
+          <h1 className="text-3xl font-bold font-serif text-ink">Organizations</h1>
+          <p className="text-ink/80 mt-1 font-sans">
             Manage your organizations and team members.
           </p>
         </div>
-        <Button className="bg-robin-green-600 hover:bg-robin-green-700 text-white">
-          <Plus className="h-4 w-4 mr-2" />
+        <Button variant="primary">
           Create Organization
         </Button>
       </div>
@@ -96,20 +95,20 @@ export default function OrganizationsPage() {
         {organizations.map((org) => (
           <Card
             key={org.id}
-            className="border-slate-200 hover:border-robin-green-300 transition-colors cursor-pointer"
+            className="cursor-pointer"
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-robin-green-100 flex items-center justify-center">
-                    <Building2 className="h-5 w-5 text-robin-green-700" />
+                  <div className={`w-10 h-10 rounded-none border-2 border-ink ${org.id === "org_2" ? "bg-robin-red-600" : "bg-robin-neon"} flex items-center justify-center`} style={{ backgroundColor: org.id === "org_2" ? '#DC2626' : '#00C16C' }}>
+                    <Building2 className="h-5 w-5 text-parchment" />
                   </div>
                   <div>
-                    <CardTitle className="text-base text-slate-800">{org.name}</CardTitle>
-                    <CardDescription className="text-xs">/{org.slug}</CardDescription>
+                    <CardTitle className="text-base text-ink">{org.name}</CardTitle>
+                    <CardDescription className="text-xs font-mono">/{org.slug}</CardDescription>
                   </div>
                 </div>
-                <button className="p-1 text-slate-400 hover:text-slate-600">
+                <button className="p-1 text-ink/70">
                   <MoreHorizontal className="h-5 w-5" />
                 </button>
               </div>
@@ -117,26 +116,28 @@ export default function OrganizationsPage() {
             <CardContent>
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1 text-slate-500">
+                  <span className="flex items-center gap-1 text-ink/80 font-mono">
                     <Users className="h-4 w-4" />
                     {org.members} members
                   </span>
                   <span
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${getRoleBadge(
+                    className={`px-2 py-0.5 rounded-none border-2 text-xs font-medium font-mono ${getRoleBadge(
                       org.role
                     )}`}
+                    style={org.role === "admin" ? { backgroundColor: '#00C16C' } : {}}
                   >
                     {org.role}
                   </span>
                 </div>
                 <span
-                  className={`px-2 py-0.5 rounded text-xs font-medium ${
+                  className={`px-2 py-0.5 rounded-none border-2 border-ink text-xs font-medium font-mono ${
                     org.plan === "Enterprise"
-                      ? "bg-purple-100 text-purple-700"
+                      ? "bg-robin-neon text-ink"
                       : org.plan === "Pro"
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-slate-100 text-slate-600"
+                      ? "bg-parchment text-ink"
+                      : "bg-parchment text-ink/70"
                   }`}
+                  style={org.plan === "Enterprise" ? { backgroundColor: '#00C16C' } : {}}
                 >
                   {org.plan}
                 </span>
@@ -149,17 +150,19 @@ export default function OrganizationsPage() {
       {/* Current Organization Details */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Team Members */}
-        <Card className="lg:col-span-2 border-slate-200">
+        <Card className="lg:col-span-2">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-slate-800 flex items-center gap-2">
-                  <Users className="h-5 w-5 text-robin-green-600" />
+                <CardTitle className="text-ink flex items-center gap-2">
+                  <div className="rounded-none border-2 border-ink bg-robin-red-600 p-1.5" style={{ backgroundColor: '#DC2626' }}>
+                    <Users className="h-4 w-4 text-parchment" />
+                  </div>
                   Team Members
                 </CardTitle>
                 <CardDescription>Acme Corporation team</CardDescription>
               </div>
-              <Button variant="outline" size="sm">
+              <Button variant="outline">
                 <Plus className="h-4 w-4 mr-1" />
                 Invite
               </Button>
@@ -170,29 +173,30 @@ export default function OrganizationsPage() {
               {teamMembers.map((member) => (
                 <div
                   key={member.id}
-                  className="flex items-center justify-between p-3 rounded-lg bg-slate-50 hover:bg-robin-green-50 transition-colors"
+                  className="flex items-center justify-between p-3 rounded-none border-2 border-ink bg-parchment"
                 >
                   <div className="flex items-center gap-3">
-                    <Avatar className="h-9 w-9">
-                      <AvatarFallback className="bg-robin-green-100 text-robin-green-700 text-sm font-medium">
+                    <Avatar className="h-9 w-9 border-2 border-ink">
+                      <AvatarFallback className="bg-robin-neon text-ink text-sm font-medium" style={{ backgroundColor: '#00C16C' }}>
                         {member.avatar}
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium text-slate-700">{member.name}</p>
-                      <p className="text-sm text-slate-500">{member.email}</p>
+                      <p className="font-medium font-serif text-ink">{member.name}</p>
+                      <p className="text-sm text-ink/80 font-mono">{member.email}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${getRoleBadge(
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-none border-2 text-xs font-medium font-mono ${getRoleBadge(
                         member.role
                       )}`}
+                      style={member.role === "admin" ? { backgroundColor: '#00C16C' } : {}}
                     >
                       {getRoleIcon(member.role)}
                       {member.role}
                     </span>
-                    <button className="p-1 text-slate-400 hover:text-slate-600">
+                    <button className="p-1 text-ink/70">
                       <MoreHorizontal className="h-4 w-4" />
                     </button>
                   </div>
@@ -203,30 +207,31 @@ export default function OrganizationsPage() {
         </Card>
 
         {/* Organization Settings */}
-        <Card className="border-slate-200">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-slate-800 flex items-center gap-2">
-              <Settings className="h-5 w-5 text-robin-green-600" />
+            <CardTitle className="text-ink flex items-center gap-2">
+              <div className="rounded-none border-2 border-ink bg-robin-neon p-1.5" style={{ backgroundColor: '#00C16C' }}>
+                <Settings className="h-4 w-4 text-parchment" />
+              </div>
               Quick Settings
             </CardTitle>
             <CardDescription>Acme Corporation settings</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="p-3 rounded-lg border border-slate-200">
-                <p className="text-sm font-medium text-slate-700">Organization ID</p>
-                <code className="text-xs text-slate-500 font-mono">org_acme_x7k9p2m1</code>
+              <div className="p-3 rounded-none border-2 border-ink bg-parchment">
+                <p className="text-sm font-medium font-serif text-ink">Organization ID</p>
+                <code className="text-xs text-ink/80 font-mono">org_acme_x7k9p2m1</code>
               </div>
-              <div className="p-3 rounded-lg border border-slate-200">
-                <p className="text-sm font-medium text-slate-700">Current Plan</p>
-                <p className="text-sm text-slate-500">Enterprise</p>
+              <div className="p-3 rounded-none border-2 border-ink bg-parchment">
+                <p className="text-sm font-medium font-serif text-ink">Current Plan</p>
+                <p className="text-sm text-ink/80 font-mono">Enterprise</p>
               </div>
-              <div className="p-3 rounded-lg border border-slate-200">
-                <p className="text-sm font-medium text-slate-700">API Keys</p>
-                <p className="text-sm text-slate-500">4 active keys</p>
+              <div className="p-3 rounded-none border-2 border-ink bg-parchment">
+                <p className="text-sm font-medium font-serif text-ink">API Keys</p>
+                <p className="text-sm text-ink/80 font-mono">4 active keys</p>
               </div>
               <Button variant="outline" className="w-full">
-                <Settings className="h-4 w-4 mr-2" />
                 Manage Settings
               </Button>
             </div>

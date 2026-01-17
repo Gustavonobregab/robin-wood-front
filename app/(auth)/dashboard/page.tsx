@@ -78,49 +78,59 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-800">Dashboard</h1>
-        <p className="text-slate-500 mt-1">
+        <h1 className="text-3xl font-bold font-serif text-ink">Dashboard</h1>
+        <p className="text-ink/80 mt-1 font-sans">
           Monitor your API usage and performance metrics.
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <Card key={stat.title} className="border-slate-200 hover:border-robin-green-300 transition-colors">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-slate-600">
-                {stat.title}
-              </CardTitle>
-              <div className="rounded-full bg-robin-green-50 p-2">
-                <stat.icon className="h-4 w-4 text-robin-green-600" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-slate-800">{stat.value}</div>
-              <div className="flex items-center gap-1 mt-1">
-                {stat.trend === "up" ? (
-                  <ArrowUpRight className="h-4 w-4 text-emerald-500" />
-                ) : (
-                  <ArrowDownRight className="h-4 w-4 text-rose-500" />
-                )}
-                <span className="text-emerald-600 font-medium text-sm">
-                  {stat.change}
-                </span>
-                <span className="text-xs text-slate-400">{stat.description}</span>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+        {stats.map((stat, index) => {
+          const useRed = index % 2 === 1; // Alternate colors: index 1 and 3 use red
+          const iconBg = useRed ? 'bg-robin-red-600' : 'bg-robin-neon';
+          const iconBgStyle = useRed ? { backgroundColor: '#DC2626' } : { backgroundColor: '#00C16C' };
+          const trendColor = useRed ? 'text-robin-red-600' : 'text-robin-neon';
+          const trendColorStyle = useRed ? { color: '#DC2626' } : { color: '#00C16C' };
+          
+          return (
+            <Card key={stat.title}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-ink">
+                  {stat.title}
+                </CardTitle>
+                <div className={`rounded-none border-2 border-ink ${iconBg} p-2`} style={iconBgStyle}>
+                  <stat.icon className="h-4 w-4 text-parchment" />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold font-serif text-ink">{stat.value}</div>
+                <div className="flex items-center gap-1 mt-1">
+                  {stat.trend === "up" ? (
+                    <ArrowUpRight className={`h-4 w-4 ${trendColor}`} style={trendColorStyle} />
+                  ) : (
+                    <ArrowDownRight className="h-4 w-4 text-robin-red-600" />
+                  )}
+                  <span className={`${trendColor} font-medium text-sm font-mono`} style={trendColorStyle}>
+                    {stat.change}
+                  </span>
+                  <span className="text-xs text-ink/70 font-mono">{stat.description}</span>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       {/* Main Content Grid */}
       <div className="grid gap-6 lg:grid-cols-7">
         {/* Weekly Usage Chart */}
-        <Card className="lg:col-span-4 border-slate-200">
+        <Card className="lg:col-span-4">
           <CardHeader>
-            <CardTitle className="text-slate-800 flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-robin-green-600" />
+            <CardTitle className="text-ink flex items-center gap-2">
+              <div className="rounded-none border-2 border-ink bg-robin-red-600 p-1.5" style={{ backgroundColor: '#DC2626' }}>
+                <TrendingUp className="h-4 w-4 text-parchment" />
+              </div>
               Weekly API Requests
             </CardTitle>
             <CardDescription>Request volume over the last 7 days</CardDescription>
@@ -129,13 +139,16 @@ export default function DashboardPage() {
             <div className="flex items-end justify-between gap-2 h-48">
               {dailyUsage.map((day) => (
                 <div key={day.day} className="flex-1 flex flex-col items-center gap-2">
-                  <div className="w-full bg-slate-100 rounded-t-md relative" style={{ height: '160px' }}>
+                  <div className="w-full bg-parchment border-2 border-ink rounded-none relative" style={{ height: '160px' }}>
                     <div
-                      className="absolute bottom-0 w-full bg-gradient-to-t from-robin-green-600 to-robin-green-400 rounded-t-md transition-all hover:from-robin-green-500 hover:to-robin-green-300"
-                      style={{ height: `${(day.requests / maxRequests) * 100}%` }}
+                      className="absolute bottom-0 w-full rounded-none"
+                      style={{ 
+                        height: `${(day.requests / maxRequests) * 100}%`,
+                        backgroundColor: '#00C16C'
+                      }}
                     />
                   </div>
-                  <span className="text-xs text-slate-500 font-medium">{day.day}</span>
+                  <span className="text-xs text-ink/80 font-mono font-medium">{day.day}</span>
                 </div>
               ))}
             </div>
@@ -143,10 +156,12 @@ export default function DashboardPage() {
         </Card>
 
         {/* Usage by Endpoint */}
-        <Card className="lg:col-span-3 border-slate-200">
+        <Card className="lg:col-span-3">
           <CardHeader>
-            <CardTitle className="text-slate-800 flex items-center gap-2">
-              <Activity className="h-5 w-5 text-robin-green-600" />
+            <CardTitle className="text-ink flex items-center gap-2">
+              <div className="rounded-none border-2 border-ink bg-robin-neon p-1.5" style={{ backgroundColor: '#00C16C' }}>
+                <Activity className="h-4 w-4 text-parchment" />
+              </div>
               Usage by Endpoint
             </CardTitle>
             <CardDescription>Top endpoints by request volume</CardDescription>
@@ -156,13 +171,16 @@ export default function DashboardPage() {
               {usageByEndpoint.map((item) => (
                 <div key={item.endpoint} className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="font-mono text-slate-600 truncate">{item.endpoint}</span>
-                    <span className="text-slate-500 font-medium">{item.percentage}%</span>
+                    <span className="font-mono text-ink truncate">{item.endpoint}</span>
+                    <span className="text-ink/80 font-medium font-mono">{item.percentage}%</span>
                   </div>
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-parchment border-2 border-ink rounded-none overflow-hidden">
                     <div
-                      className="h-full bg-robin-green-500 rounded-full"
-                      style={{ width: `${item.percentage}%` }}
+                      className="h-full rounded-none"
+                      style={{ 
+                        width: `${item.percentage}%`,
+                        backgroundColor: '#00C16C'
+                      }}
                     />
                   </div>
                 </div>
@@ -173,10 +191,12 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <Card className="border-slate-200">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-slate-800 flex items-center gap-2">
-            <Clock className="h-5 w-5 text-robin-green-600" />
+          <CardTitle className="text-ink flex items-center gap-2">
+            <div className="rounded-none border-2 border-ink bg-robin-red-600 p-1.5" style={{ backgroundColor: '#DC2626' }}>
+              <Clock className="h-4 w-4 text-parchment" />
+            </div>
             Recent API Activity
           </CardTitle>
           <CardDescription>Latest requests to your API</CardDescription>
@@ -186,36 +206,38 @@ export default function DashboardPage() {
             {recentActivity.map((activity, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-3 rounded-lg bg-slate-50 hover:bg-robin-green-50 transition-colors"
+                className="flex items-center justify-between p-3 rounded-none border-2 border-ink bg-parchment"
               >
                 <div className="flex items-center gap-4">
                   <span
-                    className={`px-2 py-1 rounded text-xs font-bold ${
+                    className={`px-2 py-1 rounded-none border-2 border-ink text-xs font-bold font-mono ${
                       activity.method === "GET"
-                        ? "bg-blue-100 text-blue-700"
+                        ? "bg-parchment text-ink"
                         : activity.method === "POST"
-                        ? "bg-emerald-100 text-emerald-700"
-                        : "bg-amber-100 text-amber-700"
+                        ? "bg-robin-neon text-ink"
+                        : "bg-parchment text-ink"
                     }`}
+                    style={activity.method === "POST" ? { backgroundColor: '#00C16C' } : {}}
                   >
                     {activity.method}
                   </span>
-                  <span className="font-mono text-sm text-slate-700">{activity.endpoint}</span>
+                  <span className="font-mono text-sm text-ink">{activity.endpoint}</span>
                 </div>
                 <div className="flex items-center gap-6">
                   <span
-                    className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                    className={`px-2 py-0.5 rounded-none border-2 border-ink text-xs font-medium font-mono ${
                       activity.status >= 200 && activity.status < 300
-                        ? "bg-emerald-100 text-emerald-700"
+                        ? "bg-robin-neon text-ink"
                         : activity.status >= 400
-                        ? "bg-rose-100 text-rose-700"
-                        : "bg-amber-100 text-amber-700"
+                        ? "bg-robin-red-600 text-parchment"
+                        : "bg-parchment text-ink"
                     }`}
+                    style={activity.status >= 200 && activity.status < 300 ? { backgroundColor: '#00C16C' } : {}}
                   >
                     {activity.status}
                   </span>
-                  <span className="text-sm text-slate-500 w-16 text-right">{activity.latency}</span>
-                  <span className="text-xs text-slate-400 w-20 text-right">{activity.time}</span>
+                  <span className="text-sm text-ink/80 w-16 text-right font-mono">{activity.latency}</span>
+                  <span className="text-xs text-ink/70 w-20 text-right font-mono">{activity.time}</span>
                 </div>
               </div>
             ))}

@@ -76,6 +76,7 @@ const config: Config = {
         'sheriff-gold': '#FFD60A', // Amarelo (Accent)
         'danger-pink': '#FF85A1',  // Rosa (Alerta)
         'robin-neon': '#00C16C',   // Verde Vibrante (Botões CTA)
+        'robin-brown': '#8B4513',  // Marrom (Cor Robin)
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -100,15 +101,12 @@ const config: Config = {
 
       // --- NOVAS ANIMAÇÕES ---
       animation: {
-        marquee: 'marquee 25s linear infinite',
+        marquee: 'marquee 70s linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         
-        // ADIÇÃO: Animações do Hero (Flechas e Flutuação)
+        // ADIÇÃO: Animações do Hero (Flutuação)
         float: 'float 6s ease-in-out infinite',
-        'arrow-fly-1': 'flyRight 15s linear infinite',
-        'arrow-fly-2': 'flyRight 20s linear infinite',
-        'arrow-fly-3': 'flyRight 25s linear infinite',
       },
       keyframes: {
         marquee: {
@@ -129,14 +127,8 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
           '50%': { transform: 'translateY(-20px) rotate(2deg)' },
         },
-        flyRight: {
-          // Começa na posição original (que já é fora da tela na esquerda)
-          '0%': { transform: 'translateX(0) translateY(0)' },
-          
-          // Vai até 150% da largura da tela (garante que cruze tudo + sobra)
-          '100%': { transform: 'translateX(150vw) translateY(100px)' }, 
-        }
-      }    }
+      }
+    }
   },
   plugins: [require("tailwindcss-animate")],
 }
