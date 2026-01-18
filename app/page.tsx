@@ -5,6 +5,7 @@ import { DemoSection } from "@/components/DemoSection";
 import { Features } from "@/components/Features";
 import { Pricing } from "@/components/Pricing";
 import { Footer } from "@/components/Footer";
+import { ExperimentalLab } from "@/components/ExperimentalLab";
 
 export default function LandingPage() {
   return (
@@ -21,6 +22,7 @@ export default function LandingPage() {
         <Hero />
         <Marquee />
         <DemoSection />
+        <ExperimentalLab />
         <Features />
         <Pricing />
         <Footer />

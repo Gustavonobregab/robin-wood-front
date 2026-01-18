@@ -1,10 +1,53 @@
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { Button } from '@/components/ui/Button';
+
+// --- Sub-componente das Flechas ---
+const ArrowIcon = ({ className }: { className?: string }) => (
+  <Image 
+    src="/arrow.svg" 
+    alt="Flying Arrow" 
+    width={400} 
+    height={100} 
+    className={`${className} w-full h-auto drop-shadow-sm`} 
+    priority 
+  />
+);
+
+const BackgroundArrows = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0 opacity-60">
+      
+      {/* Flecha 1 - Topo */}
+      <div className="absolute top-[10%] -left-96 animate-arrow-fly-1 w-64 h-auto" style={{ animationDelay: '-5s' }}>
+        <ArrowIcon />
+      </div>
+      
+      {/* Flecha 2 - Meio */}
+      <div className="absolute top-[40%] -left-96 animate-arrow-fly-2 w-48 h-auto" style={{ animationDelay: '-12s' }}>
+        <ArrowIcon />
+      </div>
+
+      {/* Flecha 3 - Baixo */}
+      <div className="absolute top-[70%] -left-96 animate-arrow-fly-3 w-80 h-auto" style={{ animationDelay: '-2s' }}>
+        <ArrowIcon />
+      </div>
+      
+      {/* Flecha 4 - Extra */}
+      <div className="absolute top-[25%] -left-96 animate-arrow-fly-1 w-56 h-auto" style={{ animationDelay: '-18s' }}>
+        <ArrowIcon />
+      </div>
+    </div>
+  );
+};
 
 // --- Componente Principal ---
 export const Hero = () => {
   return (
     <section className="relative pt-24 pb-24 px-6 overflow-hidden bg-parchment">
       
+      {/* 1. Animação de Fundo (Adicionada) */}
+      <BackgroundArrows />
+
       {/* 2. Conteúdo Principal */}
       <div className="max-w-5xl mx-auto text-center relative z-10">
         
