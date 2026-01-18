@@ -70,43 +70,41 @@ const config: Config = {
           foreground: 'hsl(var(--card-foreground))'
         },
 
-        // --- NOVAS CORES (ROBINWOOD / NEO-BRUTALISM) ---
-        'parchment': '#FFFCF5', // Creme (Fundo)
-        'ink': '#121212',       // Preto (Bordas e Texto)
-        'sheriff-gold': '#FFD60A', // Amarelo (Accent)
-        'danger-pink': '#FF85A1',  // Rosa (Alerta)
-        'robin-neon': '#00C16C',   // Verde Vibrante (Botões CTA)
-        'robin-brown': '#8B4513',  // Marrom (Cor Robin)
+        // --- CORES ROBINWOOD ---
+        'parchment': '#FFFCF5',
+        'ink': '#121212',
+        'sheriff-gold': '#FFD60A',
+        'danger-pink': '#FF85A1',
+        'robin-neon': '#00C16C',
+        'robin-brown': '#8B4513',
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
       },
-      
-      // --- NOVAS FONTES ---
       fontFamily: {
-        // Certifique-se de importar essas fontes no layout.tsx ou globals.css
         serif: ['"Fraunces"', 'serif'],
         sans: ['"Space Grotesk"', 'sans-serif'],
         mono: ['"Space Mono"', 'monospace'],
       },
-
-      // --- NOVAS SOMBRAS (HARD SHADOWS) ---
       boxShadow: {
         'hard': '4px 4px 0px 0px #121212',
         'hard-sm': '2px 2px 0px 0px #121212',
         'hard-xl': '8px 8px 0px 0px #121212',
       },
 
-      // --- NOVAS ANIMAÇÕES ---
+      // --- ANIMAÇÕES ---
       animation: {
         marquee: 'marquee 70s linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        
-        // ADIÇÃO: Animações do Hero (Flutuação)
         float: 'float 6s ease-in-out infinite',
+
+        // !!! ADIÇÃO IMPORTANTÍSSIMA: AS FLECHAS !!!
+        'arrow-fly-1': 'flyRight 15s linear infinite',
+        'arrow-fly-2': 'flyRight 20s linear infinite',
+        'arrow-fly-3': 'flyRight 25s linear infinite',
       },
       keyframes: {
         marquee: {
@@ -121,12 +119,16 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-
-        // --- CORREÇÃO AQUI ---
         float: {
           '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
           '50%': { transform: 'translateY(-20px) rotate(2deg)' },
         },
+
+        // !!! ADIÇÃO IMPORTANTÍSSIMA: O MOVIMENTO DAS FLECHAS !!!
+        flyRight: {
+          '0%': { transform: 'translateX(0) translateY(0)' },
+          '100%': { transform: 'translateX(150vw) translateY(100px)' }, 
+        }
       }
     }
   },
