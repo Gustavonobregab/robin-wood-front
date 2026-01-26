@@ -7,17 +7,14 @@ import { cn } from '@/components/ui/utils';
 import { useState } from 'react';
 
 const playgroundItems = [
-  { name: 'Compress Text', href: '/dashboard/compress', icon: 'solar:text-square-linear' },
-  { name: 'Compress Image', href: '/dashboard/image', icon: 'solar:gallery-linear' },
+  { name: 'Compress Text', href: '/dashboard/text', icon: 'solar:text-square-linear' },
   { name: 'Compress Audio', href: '/dashboard/audio', icon: 'solar:microphone-3-linear' },
-  { name: 'Batch Process', href: '/dashboard/batch', icon: 'solar:layers-linear', badge: 'New' },
 ];
 
 const managementItems = [
   { name: 'API Keys', href: '/dashboard/keys', icon: 'solar:key-linear' },
   { name: 'Usage', href: '/dashboard/usage', icon: 'solar:graph-up-linear' },
   { name: 'Billing', href: '/dashboard/billing', icon: 'solar:wallet-money-linear' },
-  { name: 'Settings', href: '/dashboard/settings', icon: 'solar:settings-linear' },
 ];
 
 export function Sidebar() {
@@ -87,6 +84,26 @@ export function Sidebar() {
               <div className="space-y-1">
                 {playgroundItems.map((item) => {
                   const isActive = pathname === item.href;
+
+                  if (item.disabled) {
+                    return (
+                      <div
+                        key={item.name}
+                        className={cn(
+                          'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-manrope text-sm text-slate-400 cursor-not-allowed opacity-60'
+                        )}
+                      >
+                        <iconify-icon icon={item.icon} width="20" />
+                        {item.name}
+                        {item.badge && (
+                          <span className="ml-auto px-2 py-0.5 rounded-full bg-brand-primary text-white text-xs font-medium">
+                            {item.badge}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  }
+
                   return (
                     <Link
                       key={item.name}
@@ -102,7 +119,7 @@ export function Sidebar() {
                       <iconify-icon icon={item.icon} width="20" />
                       {item.name}
                       {item.badge && (
-                        <span className="ml-auto px-2 py-0.5 rounded-md bg-brand-primary text-white text-xs font-medium">
+                        <span className="ml-auto px-2 py-0.5 rounded-full bg-brand-primary text-white text-xs font-medium">
                           {item.badge}
                         </span>
                       )}
