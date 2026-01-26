@@ -1,249 +1,221 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  Activity,
-  Zap,
-  AlertTriangle,
-  CheckCircle2,
-  ArrowUpRight,
-  ArrowDownRight,
-  Clock,
-  TrendingUp,
-} from "lucide-react"
+'use client';
 
-const stats = [
+import Script from 'next/script';
+import Link from 'next/link';
+
+const features = [
   {
-    title: "Total Requests",
-    value: "1.2M",
-    change: "+18.2%",
-    trend: "up",
-    icon: Activity,
-    description: "vs. last month",
+    name: 'Compress Text',
+    href: '/dashboard/compress',
+    icon: 'solar:text-square-linear',
+    color: 'bg-green-200',
+    iconColor: 'text-green-800',
   },
   {
-    title: "Success Rate",
-    value: "99.8%",
-    change: "+0.3%",
-    trend: "up",
-    icon: CheckCircle2,
-    description: "vs. last month",
+    name: 'Compress Image',
+    href: '/dashboard/image',
+    icon: 'solar:gallery-linear',
+    color: 'bg-amber-200',
+    iconColor: 'text-amber-800',
   },
   {
-    title: "Avg Latency",
-    value: "45ms",
-    change: "-12ms",
-    trend: "up",
-    icon: Zap,
-    description: "vs. last month",
+    name: 'Compress Audio',
+    href: '/dashboard/audio',
+    icon: 'solar:microphone-3-linear',
+    color: 'bg-red-200',
+    iconColor: 'text-red-800',
   },
   {
-    title: "Error Rate",
-    value: "0.2%",
-    change: "-0.1%",
-    trend: "up",
-    icon: AlertTriangle,
-    description: "vs. last month",
+    name: 'Batch Process',
+    href: '/dashboard/batch',
+    icon: 'solar:layers-linear',
+    color: 'bg-lime-200',
+    iconColor: 'text-lime-800',
   },
-]
+  {
+    name: 'API Playground',
+    href: '/dashboard/playground',
+    icon: 'solar:code-square-linear',
+    color: 'bg-yellow-200',
+    iconColor: 'text-yellow-800',
+  },
+  {
+    name: 'Analytics',
+    href: '/dashboard/usage',
+    icon: 'solar:graph-up-linear',
+    color: 'bg-red-200',
+    iconColor: 'text-red-800',
+  },
+];
 
-const recentActivity = [
-  { endpoint: "/api/v1/keys", method: "POST", status: 201, latency: "32ms", time: "2 min ago" },
-  { endpoint: "/api/v1/usage", method: "GET", status: 200, latency: "18ms", time: "5 min ago" },
-  { endpoint: "/api/v1/organizations", method: "GET", status: 200, latency: "24ms", time: "8 min ago" },
-  { endpoint: "/api/v1/billing/invoice", method: "GET", status: 200, latency: "56ms", time: "12 min ago" },
-  { endpoint: "/api/v1/keys/verify", method: "POST", status: 401, latency: "12ms", time: "15 min ago" },
-]
+const recentFiles = [
+  {
+    name: 'product-description.txt',
+    description: 'Compressed from 2.4KB to 1.1KB (54% reduction)',
+    time: '2 min ago',
+  },
+  {
+    name: 'hero-banner.png',
+    description: 'Compressed from 1.2MB to 340KB (72% reduction)',
+    time: '15 min ago',
+  },
+  {
+    name: 'podcast-ep42.mp3',
+    description: 'Compressed from 45MB to 18MB (60% reduction)',
+    time: '1 hour ago',
+  },
+];
 
-const usageByEndpoint = [
-  { endpoint: "/api/v1/keys/verify", requests: 456000, percentage: 38 },
-  { endpoint: "/api/v1/usage", requests: 312000, percentage: 26 },
-  { endpoint: "/api/v1/keys", requests: 198000, percentage: 16.5 },
-  { endpoint: "/api/v1/organizations", requests: 156000, percentage: 13 },
-  { endpoint: "/api/v1/billing", requests: 78000, percentage: 6.5 },
-]
+const quickActions = [
+  {
+    name: 'API Keys',
+    description: 'Manage your API authentication keys',
+    href: '/dashboard/keys',
+    icon: 'solar:key-linear',
+  },
+  {
+    name: 'Documentation',
+    description: 'Learn how to integrate our SDK',
+    href: '/docs',
+    icon: 'solar:book-linear',
+  },
+  {
+    name: 'Upgrade Plan',
+    description: 'Get more requests and features',
+    href: '/dashboard/billing',
+    icon: 'solar:rocket-linear',
+  },
+];
 
-const dailyUsage = [
-  { day: "Mon", requests: 180000 },
-  { day: "Tue", requests: 195000 },
-  { day: "Wed", requests: 210000 },
-  { day: "Thu", requests: 178000 },
-  { day: "Fri", requests: 225000 },
-  { day: "Sat", requests: 145000 },
-  { day: "Sun", requests: 132000 },
-]
-
-const maxRequests = Math.max(...dailyUsage.map(d => d.requests))
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 18) return 'Good afternoon';
+  return 'Good evening';
+}
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold font-serif text-ink">Dashboard</h1>
-        <p className="text-ink/80 mt-1 font-sans">
-          Monitor your API usage and performance metrics.
-        </p>
-      </div>
+    <>
+      <Script
+        src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
+        strategy="afterInteractive"
+      />
 
-      {/* Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat, index) => {
-          const useRed = index % 2 === 1; // Alternate colors: index 1 and 3 use red
-          const iconBg = useRed ? 'bg-robin-red-600' : 'bg-robin-neon';
-          const iconBgStyle = useRed ? { backgroundColor: '#DC2626' } : { backgroundColor: '#00C16C' };
-          const trendColor = useRed ? 'text-robin-red-600' : 'text-robin-neon';
-          const trendColorStyle = useRed ? { color: '#DC2626' } : { color: '#00C16C' };
-          
-          return (
-            <Card key={stat.title}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-ink">
-                  {stat.title}
-                </CardTitle>
-                <div className={`rounded-none border-2 border-ink ${iconBg} p-2`} style={iconBgStyle}>
-                  <stat.icon className="h-4 w-4 text-parchment" />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold font-serif text-ink">{stat.value}</div>
-                <div className="flex items-center gap-1 mt-1">
-                  {stat.trend === "up" ? (
-                    <ArrowUpRight className={`h-4 w-4 ${trendColor}`} style={trendColorStyle} />
-                  ) : (
-                    <ArrowDownRight className="h-4 w-4 text-robin-red-600" />
-                  )}
-                  <span className={`${trendColor} font-medium text-sm font-mono`} style={trendColorStyle}>
-                    {stat.change}
-                  </span>
-                  <span className="text-xs text-ink/70 font-mono">{stat.description}</span>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
-
-      {/* Main Content Grid */}
-      <div className="grid gap-6 lg:grid-cols-7">
-        {/* Weekly Usage Chart */}
-        <Card className="lg:col-span-4">
-          <CardHeader>
-            <CardTitle className="text-ink flex items-center gap-2">
-              <div className="rounded-none border-2 border-ink bg-robin-red-600 p-1.5" style={{ backgroundColor: '#DC2626' }}>
-                <TrendingUp className="h-4 w-4 text-parchment" />
-              </div>
-              Weekly API Requests
-            </CardTitle>
-            <CardDescription>Request volume over the last 7 days</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-end justify-between gap-2 h-48">
-              {dailyUsage.map((day) => (
-                <div key={day.day} className="flex-1 flex flex-col items-center gap-2">
-                  <div className="w-full bg-parchment border-2 border-ink rounded-none relative" style={{ height: '160px' }}>
-                    <div
-                      className="absolute bottom-0 w-full rounded-none"
-                      style={{ 
-                        height: `${(day.requests / maxRequests) * 100}%`,
-                        backgroundColor: '#00C16C'
-                      }}
-                    />
-                  </div>
-                  <span className="text-xs text-ink/80 font-mono font-medium">{day.day}</span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Usage by Endpoint */}
-        <Card className="lg:col-span-3">
-          <CardHeader>
-            <CardTitle className="text-ink flex items-center gap-2">
-              <div className="rounded-none border-2 border-ink bg-robin-neon p-1.5" style={{ backgroundColor: '#00C16C' }}>
-                <Activity className="h-4 w-4 text-parchment" />
-              </div>
-              Usage by Endpoint
-            </CardTitle>
-            <CardDescription>Top endpoints by request volume</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {usageByEndpoint.map((item) => (
-                <div key={item.endpoint} className="space-y-2">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-mono text-ink truncate">{item.endpoint}</span>
-                    <span className="text-ink/80 font-medium font-mono">{item.percentage}%</span>
-                  </div>
-                  <div className="h-2 bg-parchment border-2 border-ink rounded-none overflow-hidden">
-                    <div
-                      className="h-full rounded-none"
-                      style={{ 
-                        width: `${item.percentage}%`,
-                        backgroundColor: '#00C16C'
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Recent Activity */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-ink flex items-center gap-2">
-            <div className="rounded-none border-2 border-ink bg-robin-red-600 p-1.5" style={{ backgroundColor: '#DC2626' }}>
-              <Clock className="h-4 w-4 text-parchment" />
-            </div>
-            Recent API Activity
-          </CardTitle>
-          <CardDescription>Latest requests to your API</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {recentActivity.map((activity, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-3 rounded-none border-2 border-ink bg-parchment"
-              >
-                <div className="flex items-center gap-4">
-                  <span
-                    className={`px-2 py-1 rounded-none border-2 border-ink text-xs font-bold font-mono ${
-                      activity.method === "GET"
-                        ? "bg-parchment text-ink"
-                        : activity.method === "POST"
-                        ? "bg-robin-neon text-ink"
-                        : "bg-parchment text-ink"
-                    }`}
-                    style={activity.method === "POST" ? { backgroundColor: '#00C16C' } : {}}
-                  >
-                    {activity.method}
-                  </span>
-                  <span className="font-mono text-sm text-ink">{activity.endpoint}</span>
-                </div>
-                <div className="flex items-center gap-6">
-                  <span
-                    className={`px-2 py-0.5 rounded-none border-2 border-ink text-xs font-medium font-mono ${
-                      activity.status >= 200 && activity.status < 300
-                        ? "bg-robin-neon text-ink"
-                        : activity.status >= 400
-                        ? "bg-robin-red-600 text-parchment"
-                        : "bg-parchment text-ink"
-                    }`}
-                    style={activity.status >= 200 && activity.status < 300 ? { backgroundColor: '#00C16C' } : {}}
-                  >
-                    {activity.status}
-                  </span>
-                  <span className="text-sm text-ink/80 w-16 text-right font-mono">{activity.latency}</span>
-                  <span className="text-xs text-ink/70 w-20 text-right font-mono">{activity.time}</span>
-                </div>
-              </div>
-            ))}
+      <div className="max-w-6xl space-y-10 animate-fade">
+        {/* Header */}
+        <div className="flex items-start justify-between">
+          <div>
+            <p className="font-manrope text-sm text-slate-500 mb-1">My Workspace</p>
+            <h1 className="font-jakarta font-semibold text-4xl tracking-tight text-slate-900">
+              {getGreeting()}, Gustavo
+            </h1>
           </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
+          <div className="flex items-center gap-2">
+            <span className="font-manrope text-sm text-slate-500">Have a question?</span>
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-neutral-200 bg-white hover:bg-slate-50 transition-colors">
+              <iconify-icon icon="solar:chat-round-linear" width="18" className="text-slate-600" />
+              <span className="font-manrope text-sm font-medium text-slate-700">Talk to us</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Feature Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {features.map((feature) => (
+            <Link
+              key={feature.name}
+              href={feature.href}
+              className="group flex flex-col items-center p-6 rounded-2xl bg-slate-100 hover:bg-slate-200/80 transition-all"
+            >
+              <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-4 group-hover:scale-105 transition-transform`}>
+                <iconify-icon icon={feature.icon} width="28" className={feature.iconColor} />
+              </div>
+              <span className="font-manrope text-sm font-medium text-slate-700 text-center">
+                {feature.name}
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Two Column Section */}
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Recent Files */}
+          <div>
+            <h2 className="font-jakarta font-semibold text-xl text-slate-900 mb-4">
+              Latest from your library
+            </h2>
+            <div className="space-y-1">
+              {recentFiles.map((file) => (
+                <div
+                  key={file.name}
+                  className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="font-manrope text-sm font-medium text-slate-900 truncate">
+                      {file.name}
+                    </p>
+                    <p className="font-manrope text-xs text-slate-500 truncate">
+                      {file.description}
+                    </p>
+                  </div>
+                  <span className="font-manrope text-xs text-slate-400 whitespace-nowrap">
+                    {file.time}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div>
+            <h2 className="font-jakarta font-semibold text-xl text-slate-900 mb-4">
+              Quick actions
+            </h2>
+            <div className="space-y-1">
+              {quickActions.map((action) => (
+                <Link
+                  key={action.name}
+                  href={action.href}
+                  className="flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-200">
+                    <iconify-icon icon={action.icon} width="20" className="text-slate-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-manrope text-sm font-medium text-slate-900">
+                      {action.name}
+                    </p>
+                    <p className="font-manrope text-xs text-slate-500">
+                      {action.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Stats Banner */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-2xl bg-slate-100 border border-neutral-200">
+          <div className="text-center">
+            <p className="font-jakarta font-bold text-2xl text-slate-900">1.2M</p>
+            <p className="font-manrope text-sm text-slate-500">Total Requests</p>
+          </div>
+          <div className="text-center">
+            <p className="font-jakarta font-bold text-2xl text-brand-primary">62%</p>
+            <p className="font-manrope text-sm text-slate-500">Avg. Compression</p>
+          </div>
+          <div className="text-center">
+            <p className="font-jakarta font-bold text-2xl text-slate-900">45ms</p>
+            <p className="font-manrope text-sm text-slate-500">Avg. Latency</p>
+          </div>
+          <div className="text-center">
+            <p className="font-jakarta font-bold text-2xl text-slate-900">$847</p>
+            <p className="font-manrope text-sm text-slate-500">Saved this month</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

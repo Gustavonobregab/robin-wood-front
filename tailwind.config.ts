@@ -69,14 +69,14 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
-
-        // --- CORES ROBINWOOD ---
-        'parchment': '#FFFCF5',
-        'ink': '#121212',
-        'sheriff-gold': '#FFD60A',
-        'danger-pink': '#FF85A1',
-        'robin-neon': '#00C16C',
-        'robin-brown': '#8B4513',
+        
+        'brand': {
+          'primary': '#16a34a',      // green-600 (mesma cor do Logo)
+          'primary-hover': '#15803d', // green-700 (mesma cor do texto WOOD)
+          'primary-dark': '#14532d',  // green-900 (mais escuro)
+          'primary-light': '#22c55e', // green-500 (mais claro)
+          'primary-bg': '#f0fdf4',    // green-50
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -84,9 +84,9 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)'
       },
       fontFamily: {
-        serif: ['"Fraunces"', 'serif'],
-        sans: ['"Space Grotesk"', 'sans-serif'],
-        mono: ['"Space Mono"', 'monospace'],
+        jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+        manrope: ['"Manrope"', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       boxShadow: {
         'hard': '4px 4px 0px 0px #121212',

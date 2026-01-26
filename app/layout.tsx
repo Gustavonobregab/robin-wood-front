@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { ConsoleWelcome } from '@/components/ConsoleWelcome'
 
 export const metadata: Metadata = {
   title: 'Robin Wood',
-  description: 'Robin Wood Application',
+  description: 'Intelligent compression for the AI era',
 }
 
 export default function RootLayout({
@@ -15,7 +14,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <ConsoleWelcome />
         {children}
       </body>
     </html>

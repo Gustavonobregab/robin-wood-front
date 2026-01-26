@@ -1,5 +1,4 @@
-/* 1. IMPORTANDO AS FONTES (Fraunces, Space Grotesk, Space Mono) */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;700;900&family=Space+Grotesk:wght@300;500;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,25 +6,78 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 142 40% 15%;
-    --card: 0 0% 100%;
-    --card-foreground: 142 40% 15%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 142 40% 15%;
-    --primary: 142 76% 36%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 72% 51%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 142 20% 96%;
-    --muted-foreground: 142 10% 45%;
-    --accent: 142 40% 94%;
-    --accent-foreground: 142 76% 25%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 142 20% 90%;
-    --input: 142 20% 90%;
-    --ring: 142 76% 36%;
-    --radius: 0.5rem;
+    /* Brand */
+    --color-primary: 142 76% 36%;
+    --color-primary-light: 142 76% 94%;
+    --color-primary-dark: 142 76% 25%;
+
+    /* Neutral */
+    --color-background: 210 40% 98%;
+    --color-surface: 0 0% 100%;
+    --color-border: 220 13% 91%;
+
+    /* Text */
+    --color-text: 222 47% 11%;
+    --color-text-muted: 215 16% 47%;
+
+    /* Code Block */
+    --color-code-bg: 222 47% 6%;
   }
+
+  body {
+    background-color: #f8fafc;
+    font-family: 'Manrope', sans-serif;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #dcfce7;
+    color: #15803d;
+  }
+}
+
+@layer utilities {
+  .font-jakarta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .font-manrope {
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-fade-delay-1 {
+  animation: fadeIn 0.4s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.animate-fade-delay-2 {
+  animation: fadeIn 0.4s ease-out 0.2s forwards;
+  opacity: 0;
 }

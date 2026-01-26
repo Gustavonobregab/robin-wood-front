@@ -1,269 +1,255 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/Button"
-import {
-  CreditCard,
-  Receipt,
-  Download,
-  CheckCircle2,
-  Zap,
-  Users,
-  Activity,
-  ArrowRight,
-} from "lucide-react"
+import Script from 'next/script';
 
 const plans = [
   {
-    name: "Free",
-    price: "$0",
-    period: "/month",
-    description: "For hobby projects",
-    features: ["1,000 requests/month", "1 API key", "Community support"],
+    name: 'Free',
+    price: '$0',
+    period: '/month',
+    description: 'For hobby projects',
+    features: ['1,000 requests/month', '1 API key', 'Community support'],
     current: false,
   },
   {
-    name: "Pro",
-    price: "$29",
-    period: "/month",
-    description: "For growing teams",
-    features: ["100,000 requests/month", "10 API keys", "Email support", "Analytics dashboard"],
+    name: 'Pro',
+    price: '$29',
+    period: '/month',
+    description: 'For growing teams',
+    features: ['100,000 requests/month', '10 API keys', 'Email support', 'Analytics dashboard'],
     current: false,
   },
   {
-    name: "Enterprise",
-    price: "$199",
-    period: "/month",
-    description: "For large organizations",
+    name: 'Enterprise',
+    price: '$199',
+    period: '/month',
+    description: 'For large organizations',
     features: [
-      "Unlimited requests",
-      "Unlimited API keys",
-      "Priority support",
-      "Advanced analytics",
-      "Custom SLA",
-      "Dedicated account manager",
+      'Unlimited requests',
+      'Unlimited API keys',
+      'Priority support',
+      'Advanced analytics',
+      'Custom SLA',
+      'Dedicated account manager',
     ],
     current: true,
   },
-]
+];
 
 const invoices = [
-  { id: "INV-2024-001", date: "Jan 1, 2024", amount: "$199.00", status: "paid" },
-  { id: "INV-2024-002", date: "Feb 1, 2024", amount: "$199.00", status: "paid" },
-  { id: "INV-2024-003", date: "Mar 1, 2024", amount: "$199.00", status: "paid" },
-  { id: "INV-2024-004", date: "Apr 1, 2024", amount: "$199.00", status: "pending" },
-]
+  { id: 'INV-2024-001', date: 'Jan 1, 2024', amount: '$199.00', status: 'paid' },
+  { id: 'INV-2024-002', date: 'Feb 1, 2024', amount: '$199.00', status: 'paid' },
+  { id: 'INV-2024-003', date: 'Mar 1, 2024', amount: '$199.00', status: 'paid' },
+  { id: 'INV-2024-004', date: 'Apr 1, 2024', amount: '$199.00', status: 'pending' },
+];
 
 const usageStats = {
-  requests: { used: 856000, limit: "Unlimited" },
-  keys: { used: 4, limit: "Unlimited" },
-  members: { used: 24, limit: "Unlimited" },
-}
+  requests: { used: 856000, limit: 'Unlimited' },
+  keys: { used: 4, limit: 'Unlimited' },
+  members: { used: 24, limit: 'Unlimited' },
+};
 
 export default function BillingPage() {
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold font-serif text-ink">Billing</h1>
-        <p className="text-ink/80 mt-1 font-sans">
-          Manage your subscription and billing information.
-        </p>
-      </div>
+    <>
+      <Script
+        src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"
+        strategy="afterInteractive"
+      />
 
-      {/* Current Plan Overview */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-ink">Current Plan</CardTitle>
-            <div className="rounded-none border-2 border-ink bg-robin-red-600 p-2" style={{ backgroundColor: '#DC2626' }}>
-              <Zap className="h-4 w-4 text-parchment" />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-serif text-ink">Enterprise</div>
-            <p className="text-sm text-ink/80 font-mono">$199/month</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-ink">API Requests</CardTitle>
-            <div className="rounded-none border-2 border-ink bg-robin-neon p-2" style={{ backgroundColor: '#00C16C' }}>
-              <Activity className="h-4 w-4 text-parchment" />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-serif text-ink">856K</div>
-            <p className="text-sm text-ink/80 font-mono">Unlimited</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-ink">Team Members</CardTitle>
-            <div className="rounded-none border-2 border-ink bg-robin-red-600 p-2" style={{ backgroundColor: '#DC2626' }}>
-              <Users className="h-4 w-4 text-parchment" />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-serif text-ink">24</div>
-            <p className="text-sm text-ink/80 font-mono">Unlimited</p>
-          </CardContent>
-        </Card>
-      </div>
+      <div className="space-y-6 animate-fade">
+        {/* Header */}
+        <div>
+          <h1 className="font-jakarta font-semibold text-4xl md:text-5xl tracking-tight text-slate-900">Billing</h1>
+          <p className="font-manrope text-lg text-slate-500 mt-2">Manage your subscription and billing information.</p>
+        </div>
 
-      {/* Subscription Plans */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-ink">Subscription Plans</CardTitle>
-          <CardDescription>Choose the plan that best fits your needs</CardDescription>
-        </CardHeader>
-        <CardContent>
+        {/* Current Plan Overview */}
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="bg-white rounded-[2.5rem] p-6 border border-neutral-200 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-manrope text-sm font-medium text-slate-500">Current Plan</h3>
+              <div className="w-10 h-10 rounded-xl bg-brand-primary-bg flex items-center justify-center">
+                <iconify-icon icon="solar:bolt-linear" width="20" className="text-brand-primary-hover" />
+              </div>
+            </div>
+            <div className="font-jakarta font-semibold text-3xl text-slate-900">Enterprise</div>
+            <p className="font-manrope text-sm text-slate-500 mt-1">$199/month</p>
+          </div>
+          <div className="bg-white rounded-[2.5rem] p-6 border border-neutral-200 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-manrope text-sm font-medium text-slate-500">API Requests</h3>
+              <div className="w-10 h-10 rounded-xl bg-brand-primary-bg flex items-center justify-center">
+                <iconify-icon icon="solar:graph-up-linear" width="20" className="text-brand-primary-hover" />
+              </div>
+            </div>
+            <div className="font-jakarta font-semibold text-3xl text-slate-900">856K</div>
+            <p className="font-manrope text-sm text-slate-500 mt-1">Unlimited</p>
+          </div>
+          <div className="bg-white rounded-[2.5rem] p-6 border border-neutral-200 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-manrope text-sm font-medium text-slate-500">Team Members</h3>
+              <div className="w-10 h-10 rounded-xl bg-brand-primary-bg flex items-center justify-center">
+                <iconify-icon icon="solar:users-group-rounded-linear" width="20" className="text-brand-primary-hover" />
+              </div>
+            </div>
+            <div className="font-jakarta font-semibold text-3xl text-slate-900">24</div>
+            <p className="font-manrope text-sm text-slate-500 mt-1">Unlimited</p>
+          </div>
+        </div>
+
+        {/* Subscription Plans */}
+        <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-neutral-200 shadow-sm">
+          <div className="mb-6">
+            <h3 className="font-jakarta font-semibold text-xl text-slate-900 mb-2">Subscription Plans</h3>
+            <p className="font-manrope text-sm text-slate-500">Choose the plan that best fits your needs</p>
+          </div>
           <div className="grid gap-4 md:grid-cols-3">
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`p-6 rounded-none border-2 border-ink ${
+                className={`p-6 rounded-2xl border ${
                   plan.current
-                    ? "bg-robin-neon text-ink"
-                    : "bg-parchment text-ink"
+                    ? 'bg-brand-primary-bg border-brand-primary-light'
+                    : 'bg-white border-neutral-200 hover:border-brand-primary-light transition-colors'
                 }`}
-                style={plan.current ? { backgroundColor: '#00C16C' } : {}}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bold font-serif text-lg text-ink">{plan.name}</h3>
+                  <h3 className="font-jakarta font-semibold text-lg text-slate-900">{plan.name}</h3>
                   {plan.current && (
-                    <span className="px-2 py-0.5 rounded-none border-2 border-ink text-xs font-medium font-mono bg-parchment text-ink">
+                    <span className="px-2.5 py-1 rounded-lg text-xs font-semibold font-manrope bg-brand-primary-bg text-brand-primary-dark">
                       Current
                     </span>
                   )}
                 </div>
                 <div className="mb-2">
-                  <span className="text-3xl font-bold font-serif text-ink">{plan.price}</span>
-                  <span className="text-ink/80 font-mono">{plan.period}</span>
+                  <span className="font-jakarta font-semibold text-3xl text-slate-900">{plan.price}</span>
+                  <span className="font-manrope text-slate-500">{plan.period}</span>
                 </div>
-                <p className="text-sm text-ink/80 mb-4 font-sans">{plan.description}</p>
+                <p className="font-manrope text-sm text-slate-500 mb-4">{plan.description}</p>
                 <ul className="space-y-2 mb-6">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-ink font-mono">
-                      <CheckCircle2 className="h-4 w-4 text-ink flex-shrink-0" />
+                    <li key={feature} className="flex items-center gap-2 text-sm text-slate-700 font-manrope">
+                      <iconify-icon icon="solar:check-circle-linear" width="16" className="text-brand-primary-hover flex-shrink-0" />
                       {feature}
                     </li>
                   ))}
                 </ul>
                 {!plan.current && (
-                  <Button
-                    variant={plan.name === "Enterprise" ? "primary" : "outline"}
-                    className="w-full"
+                  <button
+                    className={`w-full font-manrope font-semibold px-4 py-2.5 rounded-full transition-all ${
+                      plan.name === 'Enterprise'
+                        ? 'bg-slate-900 text-white hover:bg-slate-800'
+                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    }`}
                   >
-                    {plan.name === "Free" ? "Downgrade" : "Upgrade"}
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
+                    {plan.name === 'Free' ? 'Downgrade' : 'Upgrade'}
+                    <iconify-icon icon="solar:arrow-right-linear" width="16" className="inline ml-2" />
+                  </button>
                 )}
                 {plan.current && (
-                  <Button variant="outline" className="w-full" disabled>
+                  <button
+                    className="w-full font-manrope font-medium bg-slate-100 text-slate-500 px-4 py-2.5 rounded-full cursor-not-allowed"
+                    disabled
+                  >
                     Current Plan
-                  </Button>
+                  </button>
                 )}
               </div>
             ))}
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Payment Method & Invoices */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Payment Method */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-ink flex items-center gap-2">
-              <div className="rounded-none border-2 border-ink bg-robin-neon p-1.5" style={{ backgroundColor: '#00C16C' }}>
-                <CreditCard className="h-4 w-4 text-parchment" />
+        {/* Payment Method & Invoices */}
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* Payment Method */}
+          <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-neutral-200 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-brand-primary-bg flex items-center justify-center">
+                <iconify-icon icon="solar:card-linear" width="20" className="text-brand-primary-hover" />
               </div>
-              Payment Method
-            </CardTitle>
-            <CardDescription>Your default payment method</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="p-4 rounded-none border-2 border-ink bg-parchment">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-8 bg-robin-red-600 rounded-none border-2 border-ink flex items-center justify-center">
-                    <span className="text-parchment text-xs font-bold font-mono">VISA</span>
-                  </div>
-                  <div>
-                    <p className="font-medium font-serif text-ink">•••• •••• •••• 4242</p>
-                    <p className="text-sm text-ink/80 font-mono">Expires 12/2025</p>
-                  </div>
-                </div>
-                <Button variant="outline">
-                  Update
-                </Button>
+              <div>
+                <h3 className="font-jakarta font-semibold text-xl text-slate-900">Payment Method</h3>
+                <p className="font-manrope text-sm text-slate-500">Your default payment method</p>
               </div>
             </div>
-            <div className="mt-4 p-4 rounded-none border-2 border-ink bg-parchment">
-              <p className="text-sm font-medium font-serif text-ink">Billing Address</p>
-              <p className="text-sm text-ink/80 mt-1 font-mono">
+            <div className="p-4 rounded-xl border border-neutral-200 bg-slate-50 mb-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-xs font-bold font-manrope">VISA</span>
+                  </div>
+                  <div>
+                    <p className="font-jakarta font-semibold text-slate-900">•••• •••• •••• 4242</p>
+                    <p className="font-manrope text-sm text-slate-500 font-mono">Expires 12/2025</p>
+                  </div>
+                </div>
+                <button className="font-manrope font-medium text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg hover:bg-slate-100 transition-colors">
+                  Update
+                </button>
+              </div>
+            </div>
+            <div className="p-4 rounded-xl border border-neutral-200 bg-slate-50">
+              <p className="font-manrope text-sm font-medium text-slate-700 mb-2">Billing Address</p>
+              <p className="font-manrope text-sm text-slate-600 font-mono">
                 Acme Corporation<br />
                 123 Tech Street<br />
                 San Francisco, CA 94102
               </p>
-              <Button variant="link" className="mt-2 p-0 h-auto text-robin-neon font-mono" style={{ color: '#00C16C' }}>
+              <button className="font-manrope font-medium text-brand-primary-hover hover:text-brand-primary-dark mt-3 text-sm">
                 Edit address
-              </Button>
+              </button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
 
-        {/* Invoices */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-ink flex items-center gap-2">
-              <div className="rounded-none border-2 border-ink bg-robin-red-600 p-1.5" style={{ backgroundColor: '#DC2626' }}>
-                <Receipt className="h-4 w-4 text-parchment" />
+          {/* Invoices */}
+          <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-neutral-200 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-brand-primary-bg flex items-center justify-center">
+                <iconify-icon icon="solar:receipt-linear" width="20" className="text-brand-primary-hover" />
               </div>
-              Recent Invoices
-            </CardTitle>
-            <CardDescription>Download your past invoices</CardDescription>
-          </CardHeader>
-          <CardContent>
+              <div>
+                <h3 className="font-jakarta font-semibold text-xl text-slate-900">Recent Invoices</h3>
+                <p className="font-manrope text-sm text-slate-500">Download your past invoices</p>
+              </div>
+            </div>
             <div className="space-y-3">
               {invoices.map((invoice) => (
                 <div
                   key={invoice.id}
-                  className="flex items-center justify-between p-3 rounded-none border-2 border-ink bg-parchment"
+                  className="flex items-center justify-between p-4 rounded-xl border border-neutral-200 bg-slate-50 hover:bg-slate-100 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <Receipt className="h-4 w-4 text-ink/70" />
+                    <iconify-icon icon="solar:receipt-linear" width="20" className="text-slate-400" />
                     <div>
-                      <p className="font-medium font-serif text-ink">{invoice.id}</p>
-                      <p className="text-sm text-ink/80 font-mono">{invoice.date}</p>
+                      <p className="font-jakarta font-semibold text-slate-900">{invoice.id}</p>
+                      <p className="font-manrope text-sm text-slate-500 font-mono">{invoice.date}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="font-medium font-serif text-ink">{invoice.amount}</span>
+                    <span className="font-jakarta font-semibold text-slate-900">{invoice.amount}</span>
                     <span
-                      className={`px-2 py-0.5 rounded-none border-2 border-ink text-xs font-medium font-mono ${
-                        invoice.status === "paid"
-                          ? "bg-robin-neon text-ink"
-                          : "bg-parchment text-ink"
+                      className={`px-2.5 py-1 rounded-lg text-xs font-semibold font-manrope ${
+                        invoice.status === 'paid'
+                          ? 'bg-brand-primary-bg text-brand-primary-hover'
+                          : 'bg-amber-100 text-amber-700'
                       }`}
-                      style={invoice.status === "paid" ? { backgroundColor: '#00C16C' } : {}}
                     >
                       {invoice.status}
                     </span>
-                    <button className="p-1 text-ink/70">
-                      <Download className="h-4 w-4" />
+                    <button className="p-2 text-slate-400 hover:text-slate-900 transition-colors">
+                      <iconify-icon icon="solar:download-linear" width="18" />
                     </button>
                   </div>
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4">
+            <button className="w-full mt-4 font-manrope font-medium bg-slate-100 text-slate-700 px-4 py-2.5 rounded-full hover:bg-slate-200 transition-colors">
               View All Invoices
-            </Button>
-          </CardContent>
-        </Card>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  )
+    </>
+  );
 }
