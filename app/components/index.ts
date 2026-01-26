@@ -8,7 +8,7 @@ export { PricingSection } from './PricingSection';
 export { Footer } from './Footer';
 export { Logo } from './Logo';
 export { SocialLinks } from './SocialLinks';
-export { cn } from '@/components/ui/utils';
+export { cn } from '@/components/utils';
 export { Button } from './Button';
 export { Card, CardHeader, CardContent } from './Card';
 export { Badge } from './Badge';

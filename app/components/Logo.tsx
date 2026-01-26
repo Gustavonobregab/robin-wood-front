@@ -1,4 +1,4 @@
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/components/utils';
 
 interface LogoProps {
   size?: 'sm' | 'md';

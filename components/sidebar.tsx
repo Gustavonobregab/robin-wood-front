@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/components/utils';
 import { useState } from 'react';
 
 const playgroundItems = [

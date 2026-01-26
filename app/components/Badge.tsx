@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/components/utils';
 
 type BadgeVariant = 'status' | 'label' | 'size';
 

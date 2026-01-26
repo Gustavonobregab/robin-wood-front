@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { cn } from '@/components/ui/utils';
+import { cn } from '@/components/utils';
 
 interface BentoGridProps {
   children: ReactNode;
