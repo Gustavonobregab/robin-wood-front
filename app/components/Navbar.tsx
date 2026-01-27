@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Logo } from './Logo';
 import { Button } from './Button';
 
@@ -13,7 +14,9 @@ export function Navbar({ className }: NavbarProps) {
       <Logo />
       <div className="flex items-center gap-4">
         <Button variant="ghost">Documentation</Button>
-        <Button variant="primary" size="md">Get API Key</Button>
+        <Link href="/login">
+          <Button variant="primary" size="md">Get API Key</Button>
+        </Link>
       </div>
     </div>
   );
