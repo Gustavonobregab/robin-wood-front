@@ -3,7 +3,7 @@ import { Button } from './Button';
 export function PricingSection() {
   return (
     <div className="animate-fade-delay-2 py-8">
-      <div className="bg-slate-900 rounded-[3rem] p-8 md:p-16 border border-slate-800 text-center relative overflow-hidden">
+      <div className="bg-black rounded-[3rem] p-8 md:p-16 border border-black text-center relative overflow-hidden">
         {/* Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-green-600/10 blur-[100px] rounded-full pointer-events-none" />
 
@@ -24,7 +24,7 @@ export function PricingSection() {
               <span className="text-sm font-manrope font-semibold text-slate-400 uppercase tracking-wider mb-4">
                 Standard AI Cost
               </span>
-              <div className="w-full h-48 bg-slate-800 rounded-xl relative flex items-end justify-center p-4">
+              <div className="w-full h-48 bg-black rounded-xl relative flex items-end justify-center p-4">
                 <div className="w-24 bg-red-400/80 h-full rounded-t-lg flex items-center justify-center text-white font-bold font-jakarta relative group">
                   <span className="z-10">$1000</span>
                   <div className="absolute inset-0 bg-red-400 blur opacity-20" />
@@ -41,7 +41,7 @@ export function PricingSection() {
               <span className="text-sm font-manrope font-semibold text-white uppercase tracking-wider mb-4">
                 With Robin Wood
               </span>
-              <div className="w-full h-48 bg-slate-800 rounded-xl relative flex items-end justify-center gap-1 p-4">
+              <div className="w-full h-48 bg-black rounded-xl relative flex items-end justify-center gap-1 p-4">
                 {/* Base Cost */}
                 <div className="w-24 bg-green-600 h-[40%] rounded-b-sm rounded-t-lg flex items-center justify-center text-white font-bold font-jakarta text-xs">
                   $400

@@ -69,7 +69,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
         },
-        
+
         'brand': {
           'primary': '#16a34a',      // green-600 (mesma cor do Logo)
           'primary-hover': '#15803d', // green-700 (mesma cor do texto WOOD)

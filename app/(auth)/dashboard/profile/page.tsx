@@ -11,7 +11,7 @@ export default function ProfilePage() {
       />
 
       <div className="space-y-6 animate-fade">
-        {/* Header */}
+      {/* Header */}
         <div>
           <h1 className="font-jakarta font-semibold text-4xl md:text-5xl tracking-tight text-slate-900">
             Profile
@@ -41,7 +41,7 @@ export default function ProfilePage() {
                     defaultValue="John Doe"
                     className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 bg-slate-50 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors font-manrope text-slate-900"
                   />
-                </div>
+      </div>
                 <div>
                   <label className="font-manrope text-sm font-medium text-slate-700 mb-1.5 block">Email Address</label>
                   <input
@@ -49,15 +49,15 @@ export default function ProfilePage() {
                     defaultValue="john.doe@acme.com"
                     className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 bg-slate-50 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors font-manrope text-slate-900"
                   />
-                </div>
-                <div>
+                  </div>
+                  <div>
                   <label className="font-manrope text-sm font-medium text-slate-700 mb-1.5 block">Phone Number</label>
                   <input
                     type="tel"
                     defaultValue="+1 (555) 123-4567"
                     className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 bg-slate-50 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors font-manrope text-slate-900"
                   />
-                </div>
+                  </div>
                 <div>
                   <label className="font-manrope text-sm font-medium text-slate-700 mb-1.5 block">Bio</label>
                   <textarea
@@ -85,22 +85,22 @@ export default function ProfilePage() {
               </div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-xl border border-neutral-200 bg-slate-50">
-                  <div>
+              <div>
                     <p className="font-jakarta font-medium text-slate-900">Password</p>
                     <p className="font-manrope text-sm text-slate-500">Last updated 3 months ago</p>
                   </div>
                   <button className="font-manrope font-medium text-brand-primary-hover hover:text-brand-primary-dark px-4 py-2 rounded-full hover:bg-brand-primary-bg transition-colors">
                     Change Password
                   </button>
-                </div>
+              </div>
                 <div className="flex items-center justify-between p-4 rounded-xl border border-neutral-200 bg-slate-50">
-                  <div>
+                    <div>
                     <p className="font-jakarta font-medium text-slate-900">Two-Factor Authentication</p>
                     <p className="font-manrope text-sm text-slate-500">Add an extra layer of security</p>
                   </div>
                   <button className="font-manrope font-medium text-brand-primary-hover hover:text-brand-primary-dark px-4 py-2 rounded-full hover:bg-brand-primary-bg transition-colors">
                     Enable 2FA
-                  </button>
+                    </button>
                 </div>
                 <div className="flex items-center justify-between p-4 rounded-xl border border-neutral-200 bg-slate-50">
                   <div>
@@ -140,7 +140,7 @@ export default function ProfilePage() {
                 </div>
                 <h3 className="font-jakarta font-semibold text-xl text-slate-900">Account Stats</h3>
               </div>
-              <div className="space-y-4">
+            <div className="space-y-4">
                 <div className="p-4 rounded-xl border border-neutral-200 bg-slate-50">
                   <p className="font-manrope text-sm text-slate-500 mb-1">Member Since</p>
                   <p className="font-jakarta font-semibold text-slate-900">January 2024</p>

@@ -1,6 +1,7 @@
 import { Badge } from './Badge';
 import { Navbar } from './Navbar';
 import { FeaturePreview } from './FeaturePreview';
+import { CompressingTitle } from './CompressingTitle';
 
 export function HeroSection() {
   return (
@@ -15,11 +16,9 @@ export function HeroSection() {
           </span>
         </Badge>
 
-        <h1 className="font-jakarta font-semibold text-5xl md:text-7xl tracking-tighter text-slate-900 leading-[1.1] max-w-4xl mb-6">
-          Intelligent compression <br className="hidden md:block" /> for the AI era.
-        </h1>
+        <CompressingTitle />
 
-        <p className="font-manrope text-lg text-slate-500 max-w-xl mb-12">
+        <p className="font-manrope text-lg text-slate-500 max-w-xl mb-12 mt-8">
           Reduce bandwidth costs by up to 60% with context-aware semantic compression.
         </p>
 
@@ -27,7 +26,7 @@ export function HeroSection() {
       </div>
 
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:200px_200px] pointer-events-none z-0" />
     </div>
   );
 }
