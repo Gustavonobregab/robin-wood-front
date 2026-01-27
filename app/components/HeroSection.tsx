@@ -1,6 +1,6 @@
 import { Badge } from './Badge';
 import { Navbar } from './Navbar';
-import { CodeBlock } from './CodeBlock';
+import { FeaturePreview } from './FeaturePreview';
 
 export function HeroSection() {
   return (
@@ -11,7 +11,7 @@ export function HeroSection() {
       <div className="w-full px-4 pt-16 pb-12 md:pt-20 md:pb-16 flex flex-col items-center text-center relative z-10">
         <Badge variant="status" className="mb-6">
           <span className="text-xs font-semibold font-manrope text-green-700 uppercase tracking-wide">
-            v2.4 Available Now
+            BETA DISCOUNT
           </span>
         </Badge>
 
@@ -23,11 +23,11 @@ export function HeroSection() {
           Reduce bandwidth costs by up to 60% with context-aware semantic compression.
         </p>
 
-        <CodeBlock />
+        <FeaturePreview />
       </div>
 
       {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none z-0" />
     </div>
   );
 }

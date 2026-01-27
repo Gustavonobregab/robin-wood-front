@@ -81,7 +81,6 @@ export default function LandingPage() {
       <div className="min-h-screen text-slate-800 antialiased pb-12">
         <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
           <HeroSection />
-
           <ClientsStrip />
 
           <BentoGrid>

@@ -5,7 +5,6 @@ export default function PublicLayout({
 }) {
   return (
     <div>
-      <h2>Public Section</h2>
       {children}
     </div>
   )

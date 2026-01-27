@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { loginWithGoogle } from '../../http/login'; // Certifique-se que o caminho está correto
-import { Badge } from '../../components/Badge'; // Reutilizando seu componente
+import { loginWithGoogle } from '../../http/login'; 
+import { Badge } from '../../components/Badge'; 
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -22,25 +22,17 @@ export default function LoginPage() {
     <div className="min-h-screen w-full flex flex-col items-center justify-center relative bg-neutral-50 overflow-hidden font-manrope">
       
       {/* Background Grid (Reutilizado da HeroSection para consistência) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none z-0" />
 
       {/* Main Card */}
       <div className="relative z-10 w-full max-w-md px-6">
         <div className="bg-white rounded-[2rem] shadow-sm border border-neutral-200 p-8 md:p-10 flex flex-col items-center text-center animate-fade">
           
-          {/* Logo / Badge */}
-          <div className="mb-8">
-            <div className="h-12 w-12 bg-slate-900 rounded-xl flex items-center justify-center mb-4 mx-auto shadow-lg shadow-slate-900/20">
-              <span className="text-white font-bold text-xl">R</span>
-            </div>
-            <Badge className="bg-neutral-100 text-neutral-600 border-neutral-200 border">
-              <span className="text-xs font-semibold uppercase tracking-wide">Secure Access</span>
-            </Badge>
-          </div>
+      
 
           {/* Texts */}
           <h1 className="font-jakarta font-bold text-3xl text-slate-900 tracking-tight mb-3">
-            Welcome back
+            Start your journey
           </h1>
           <p className="text-slate-500 text-sm mb-8 max-w-[280px] leading-relaxed">
             Log in to manage your API keys, monitor usage, and optimize your content.
@@ -80,7 +72,6 @@ export default function LoginPage() {
             )}
           </button>
 
-          {/* Footer / Terms */}
           <div className="mt-8 pt-6 border-t border-neutral-100 w-full">
             <p className="text-xs text-slate-400">
               By continuing, you agree to our{' '}
@@ -98,7 +89,7 @@ export default function LoginPage() {
         
         {/* Simple Footer Text */}
         <p className="text-center mt-6 text-sm text-slate-400 font-medium">
-          &copy; {new Date().getFullYear()} Robin Wood API.
+          &copy; {new Date().getFullYear()} Robin Wood
         </p>
       </div>
     </div>
