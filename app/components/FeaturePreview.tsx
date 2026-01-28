@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { cn } from '@/components/utils';
 import { CodeBlock } from './CodeBlock';
 
@@ -27,7 +27,7 @@ const features: { id: Feature; label: string; icon: React.ReactNode }[] = [
   },
   {
     id: 'api',
-    label: 'API',
+    label: 'API Integration',
     icon: (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -43,9 +43,7 @@ export function FeaturePreview() {
   );
   const [compressedText, setCompressedText] = useState<string | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
-  const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioCompressed, setAudioCompressed] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleTextCompress = () => {
     setIsCompressing(true);
@@ -60,29 +58,7 @@ export function FeaturePreview() {
     }, 1500);
   };
 
-  const handleAudioCompress = () => {
-    if (!audioFile) return;
-    setIsCompressing(true);
-    setTimeout(() => {
-      setAudioCompressed(true);
-      setIsCompressing(false);
-    }, 2000);
-  };
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setAudioFile(file);
-      setAudioCompressed(false);
-    }
-  };
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  };
-
+  
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Tabs */}
@@ -94,6 +70,7 @@ export function FeaturePreview() {
               setActiveFeature(feature.id);
               setCompressedText(null);
               setAudioCompressed(false);
+              setIsCompressing(false);
             }}
             className={cn(
               'flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold font-manrope transition-all',
@@ -109,15 +86,15 @@ export function FeaturePreview() {
       </div>
 
       {/* PREMIUM CARD WRAPPER */}
-      <div className="relative px-[6px] pt-[6px] pb-4 rounded-[28px] bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 shadow-xl overflow-hidden">
+      <div className="relative px-[6px] pt-[6px] pb-4 rounded-[28px] bg-gradient-to-br from-slate-50 via-white to-emerald-50/50 shadow-xl overflow-hidden">
 
-      {/* Gradient glow decorativo */}
+      {/* Gradient glow decorativo - subtle corner accent */}
       <div
         aria-hidden
-        className="absolute -bottom-24 -right-24 w-[460px] h-[260px] opacity-60 blur-2xl"
+        className="absolute -bottom-32 -right-32 w-[200px] h-[200px] opacity-30 blur-3xl"
         style={{
           background:
-            'linear-gradient(230deg, rgb(34,197,94), rgb(16,185,129), rgb(5,150,105))',
+            'linear-gradient(230deg, rgb(34,197,94), rgb(16,185,129))',
         }}
       />
 
@@ -152,13 +129,7 @@ export function FeaturePreview() {
               </div>
 
               {/* DIVIDER */}
-              <div className="hidden md:block w-px bg-[repeating-linear-gradient(
-                to_bottom,
-                transparent,
-                transparent_6px,
-                rgb(203_213_225)_6px,
-                rgb(203_213_225)_8px
-              )]" />
+              <div className="hidden md:block w-px bg-slate-200" />
 
               {/* RIGHT */}
               <div>
@@ -215,87 +186,76 @@ export function FeaturePreview() {
 
         {activeFeature === 'audio' && (
           <div className="p-6 md:p-8">
-            <div className="flex flex-col items-center">
-              {!audioFile ? (
-                <>
-                  <div className="w-full max-w-md">
-                    <label className="block text-sm font-medium text-slate-500 mb-3 text-center">
-                      Upload audio file
-                    </label>
-                    <div
-                      onClick={() => fileInputRef.current?.click()}
-                      className="border-2 border-dashed border-slate-300 rounded-xl p-12 text-center cursor-pointer hover:border-green-500 hover:bg-green-50/50 transition-all"
-                    >
-                      <svg className="w-12 h-12 mx-auto mb-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="grid md:grid-cols-[1fr_auto_1fr] gap-6">
+
+              {/* LEFT - Original Audio */}
+              <div>
+                <label className="block text-sm font-medium text-slate-500 mb-3">
+                  Original audio
+                </label>
+                <div className="flex flex-col items-center justify-center h-40">
+                  <svg className="w-10 h-10 mb-3 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                  </svg>
+                  <p className="text-sm text-slate-600 font-medium">medical-audio-example.mp3</p>
+                  <p className="text-xs text-slate-400 mt-1">2.4 MB • Medical transcription</p>
+                </div>
+              </div>
+
+              {/* DIVIDER */}
+              <div className="hidden md:block w-px bg-slate-200" />
+
+              {/* RIGHT - Compressed Output */}
+              <div>
+                <label className="block text-sm font-medium text-slate-500 mb-3">
+                  Compressed output
+                </label>
+                <div className="flex flex-col items-center justify-center h-40">
+                  {isCompressing ? (
+                    <div className="flex items-center gap-2 text-green-600">
+                      <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      <span className="font-medium">Compressing…</span>
+                    </div>
+                  ) : audioCompressed ? (
+                    <>
+                      <svg className="w-10 h-10 mb-3 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                       </svg>
-                      <p className="text-slate-600 font-medium mb-2">Click to upload audio</p>
-                      <p className="text-xs text-slate-400">MP3, WAV, or other audio formats</p>
-                    </div>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="audio/*"
-                      onChange={handleFileSelect}
-                      className="hidden"
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="w-full max-w-md mb-6">
-                    <label className="block text-sm font-medium text-slate-500 mb-3">
-                      Audio file
-                    </label>
-                    <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-slate-900">{audioFile.name}</p>
-                          <p className="text-xs text-slate-500 mt-1">{formatFileSize(audioFile.size)}</p>
-                        </div>
-                        <button
-                          onClick={() => {
-                            setAudioFile(null);
-                            setAudioCompressed(false);
-                          }}
-                          className="text-slate-400 hover:text-slate-600"
-                        >
-                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {audioCompressed && (
-                    <div className="w-full max-w-md mb-6">
-                      <label className="block text-sm font-medium text-slate-500 mb-3">
-                        Compressed audio
-                      </label>
-                      <div className="p-4 bg-green-50 border border-green-200 rounded-xl">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-sm font-medium text-green-900">{audioFile.name.replace(/\.[^/.]+$/, '')}_compressed.mp3</p>
-                            <p className="text-xs text-green-700 mt-1">{formatFileSize(audioFile.size * 0.4)}</p>
-                          </div>
-                          <span className="text-green-600 font-semibold text-sm">60% smaller</span>
-                        </div>
-                      </div>
-                    </div>
+                      <p className="text-sm text-green-700 font-medium">medical-audio_compressed.mp3</p>
+                      <p className="text-xs text-green-600 mt-1">960 KB • <span className="font-semibold">60% smaller</span></p>
+                    </>
+                  ) : (
+                    <p className="text-slate-400 italic text-sm">
+                      Compressed audio will appear here…
+                    </p>
                   )}
+                </div>
+              </div>
+            </div>
 
-                  <button
-                    onClick={handleAudioCompress}
-                    disabled={isCompressing || audioCompressed}
-                    className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-full font-semibold
-                              hover:bg-green-500 transition-all shadow-[0_0_20px_rgba(22,163,74,0.3)]
-                              hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
-                  >
-                    {isCompressing ? 'Compressing…' : audioCompressed ? 'Compressed' : 'Compress Audio'}
-                  </button>
-                </>
-              )}
+            {/* BUTTON */}
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => {
+                  if (!audioCompressed) {
+                    setIsCompressing(true);
+                    setTimeout(() => {
+                      setAudioCompressed(true);
+                      setIsCompressing(false);
+                    }, 2000);
+                  }
+                }}
+                disabled={isCompressing || audioCompressed}
+                className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-full font-semibold
+                          hover:bg-green-500 transition-all shadow-[0_0_20px_rgba(22,163,74,0.3)]
+                          hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
+              >
+                {isCompressing ? 'Compressing…' : audioCompressed ? 'Compressed' : 'Compress Audio'}
+              </button>
             </div>
           </div>
         )}
