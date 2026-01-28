@@ -7,44 +7,26 @@ const features = [
   {
     name: 'Compress Text',
     href: '/dashboard/compress',
-    icon: 'solar:text-square-linear',
-    color: 'bg-green-500',
-    iconColor: 'text-white',
   },
   {
     name: 'Compress Image',
     href: '/dashboard/image',
-    icon: 'solar:gallery-linear',
-    color: 'bg-amber-500',
-    iconColor: 'text-white',
   },
   {
     name: 'Compress Audio',
     href: '/dashboard/audio',
-    icon: 'solar:microphone-3-linear',
-    color: 'bg-red-500',
-    iconColor: 'text-white',
   },
   {
     name: 'Batch Process',
     href: '/dashboard/batch',
-    icon: 'solar:layers-linear',
-    color: 'bg-lime-500',
-    iconColor: 'text-white',
   },
   {
     name: 'API Playground',
     href: '/dashboard/playground',
-    icon: 'solar:code-square-linear',
-    color: 'bg-yellow-300',
-    iconColor: 'text-white',
   },
   {
     name: 'Analytics',
     href: '/dashboard/usage',
-    icon: 'solar:graph-up-linear',
-    color: 'bg-purple-500',
-    iconColor: 'text-white',
   },
 ];
 
@@ -128,9 +110,7 @@ export default function DashboardPage() {
               href={feature.href}
               className="group flex flex-col items-center p-6 rounded-2xl bg-slate-100 hover:bg-slate-200/80 transition-all"
             >
-              <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-4 group-hover:scale-105 transition-transform`}>
-                <iconify-icon icon={feature.icon} width="28" className={feature.iconColor} />
-              </div>
+              <div className="w-16 h-16 rounded-2xl bg-slate-400 mb-4 group-hover:scale-105 transition-transform" />
               <span className="font-manrope text-sm font-medium text-slate-700 text-center">
                 {feature.name}
               </span>
@@ -196,25 +176,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Stats Banner */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 rounded-2xl bg-slate-100 border border-neutral-200">
-          <div className="text-center">
-            <p className="font-jakarta font-bold text-2xl text-slate-900">1.2M</p>
-            <p className="font-manrope text-sm text-slate-500">Total Requests</p>
-          </div>
-          <div className="text-center">
-            <p className="font-jakarta font-bold text-2xl text-brand-primary">62%</p>
-            <p className="font-manrope text-sm text-slate-500">Avg. Compression</p>
-          </div>
-          <div className="text-center">
-            <p className="font-jakarta font-bold text-2xl text-slate-900">45ms</p>
-            <p className="font-manrope text-sm text-slate-500">Avg. Latency</p>
-          </div>
-          <div className="text-center">
-            <p className="font-jakarta font-bold text-2xl text-slate-900">$847</p>
-            <p className="font-manrope text-sm text-slate-500">Saved this month</p>
-          </div>
-        </div>
       </div>
     </>
   );
