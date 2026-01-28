@@ -14,3 +14,6 @@ export { Card, CardHeader, CardContent } from './Card';
 export { Badge } from './Badge';
 export { IconBox } from './IconBox';
 export { ProgressBar } from './ProgressBar';
+export { FeaturesShowcase } from './FeaturesShowcase';
+export { UseCasesSection } from './UseCasesSection';
+export { IntegrationSection } from './IntegrationSection';

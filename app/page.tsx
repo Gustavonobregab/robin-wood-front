@@ -8,6 +8,9 @@ import {
   FeatureCard,
   PricingSection,
   Footer,
+  FeaturesShowcase,
+  UseCasesSection,
+  IntegrationSection,
 } from './components';
 import { ProgressBar } from './components/';
 
@@ -79,59 +82,13 @@ export default function LandingPage() {
       />
 
       <div className="min-h-screen text-slate-800 antialiased pb-12">
-        <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
+        <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 space-y-4">
           <HeroSection />
           <ClientsStrip />
-
-          <BentoGrid>
-            {/* Large Feature Card */}
-            <FeatureCard
-              size="large"
-              icon="solar:text-square-linear"
-              title="Semantic Text Compression"
-              description="Our AI analyzes sentence structure to strip redundant phrasing while strictly preserving the original meaning, resulting in massive text payload reductions."
-              visual={<SemanticTextVisual />}
-            />
-
-            {/* Small Feature Cards */}
-            <FeatureCard
-              icon="solar:microphone-3-linear"
-              title="Silence Trimming"
-              description="Auto-removes background noise & silence."
-              visual={<SilenceTrimmingVisual />}
-            />
-
-            <FeatureCard
-              icon="solar:gallery-linear"
-              title="Smart Image"
-              description="Perceptual optimization for web assets."
-              visual={<SmartImageVisual />}
-            />
-
-            <FeatureCard
-              icon="solar:code-circle-linear"
-              title="Unified API"
-              description="One interface for all media types."
-              visual={<UnifiedApiVisual />}
-            />
-
-            <FeatureCard
-              icon="solar:wallet-money-linear"
-              title="Cost Efficiency"
-              description="Drastically lower storage bills."
-              visual={<ProgressBar value={40} className="mt-0" />}
-            />
-
-            <FeatureCard
-              icon="solar:transfer-horizontal-linear"
-              title="Bandwidth"
-              description="Faster load times for end users."
-              visual={<BandwidthVisual />}
-            />
-          </BentoGrid>
-
+          <FeaturesShowcase />
+          <IntegrationSection />
+          <UseCasesSection />
           <PricingSection />
-
           <Footer />
         </main>
       </div>
