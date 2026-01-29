@@ -2,6 +2,7 @@
 
 import Script from 'next/script';
 import Link from 'next/link';
+import { useProfile } from '../../hooks/use-profile';
 
 const features = [
   {
@@ -77,6 +78,8 @@ function getGreeting() {
 }
 
 export default function DashboardPage() {
+  const { user, isLoading } = useProfile();
+
   return (
     <>
       <Script
@@ -90,7 +93,13 @@ export default function DashboardPage() {
           <div>
             <p className="font-manrope text-sm text-slate-500 mb-1">My Workspace</p>
             <h1 className="font-jakarta font-semibold text-4xl tracking-tight text-slate-900">
-              {getGreeting()}, Gustavo
+              {isLoading ? (
+            <span className="animate-pulse bg-slate-200 rounded h-10 w-48 inline-block align-bottom" />
+          ) : (
+            <>
+              {getGreeting()}, <span className="text-slate-900">{user?.name?.split(' ')[0] || 'User'}</span>
+            </>
+          )}
             </h1>
           </div>
           <div className="flex items-center gap-2">

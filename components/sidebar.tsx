@@ -3,15 +3,25 @@
 import Script from 'next/script';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { cn } from '@/components/utils';
+import { cn } from '@/components/utils'; // Ajuste se seu utils estiver em outro lugar
 import { useState } from 'react';
+import { useProfile } from '../app/hooks/use-profile';
 
-const playgroundItems = [
+// 👈 2. Defina a interface para corrigir o erro do "item"
+interface NavItem {
+  name: string;
+  href: string;
+  icon: string;
+  disabled?: boolean;
+  badge?: string;
+}
+
+const playgroundItems: NavItem[] = [
   { name: 'Compress Text', href: '/dashboard/text', icon: 'solar:text-square-linear' },
   { name: 'Compress Audio', href: '/dashboard/audio', icon: 'solar:microphone-3-linear' },
 ];
 
-const managementItems = [
+const managementItems: NavItem[] = [
   { name: 'API Keys', href: '/dashboard/keys', icon: 'solar:key-linear' },
   { name: 'Usage', href: '/dashboard/usage', icon: 'solar:graph-up-linear' },
   { name: 'Billing', href: '/dashboard/billing', icon: 'solar:wallet-money-linear' },
@@ -20,6 +30,9 @@ const managementItems = [
 export function Sidebar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // 👈 3. Busque os dados do usuário
+  const { user, isLoading } = useProfile();
 
   return (
     <>
@@ -158,20 +171,41 @@ export function Sidebar() {
             </div>
           </nav>
 
-          {/* User Profile */}
+          {/* User Profile - 👈 4. Sessão Dinâmica */}
           <div className="p-4 border-t border-neutral-100">
             <Link
               href="/dashboard/profile"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition-colors"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition-colors group"
             >
-              <div className="w-8 h-8 rounded-full bg-brand-primary-bg flex items-center justify-center">
-                <iconify-icon icon="solar:user-linear" width="18" className="text-brand-primary" />
+              {/* Lógica do Avatar: Se tiver imagem, mostra. Se não, mostra ícone */}
+              <div className="w-8 h-8 rounded-full bg-brand-primary-bg flex items-center justify-center overflow-hidden border border-neutral-100 group-hover:border-neutral-300 transition-colors">
+                 {isLoading ? (
+                    <div className="w-full h-full bg-slate-200 animate-pulse" />
+                 ) : user?.image ? (
+                    <img src={user.image} alt={user.name} className="w-full h-full object-cover" />
+                 ) : (
+                    <iconify-icon icon="solar:user-linear" width="18" className="text-brand-primary" />
+                 )}
               </div>
+              
               <div className="flex-1 min-w-0">
-                <p className="font-manrope text-sm font-medium text-slate-900 truncate">Gustavo</p>
-                <p className="font-manrope text-xs text-slate-500 truncate">Pro Plan</p>
+                {isLoading ? (
+                    <div className="space-y-1">
+                        <div className="h-3 w-20 bg-slate-200 rounded animate-pulse" />
+                        <div className="h-2 w-12 bg-slate-200 rounded animate-pulse" />
+                    </div>
+                ) : (
+                    <>
+                        <p className="font-manrope text-sm font-medium text-slate-900 truncate">
+                            {user?.name || 'User'}
+                        </p>
+                        <p className="font-manrope text-xs text-slate-500 truncate">
+                            {user?.email || 'Free Plan'}
+                        </p>
+                    </>
+                )}
               </div>
-              <iconify-icon icon="solar:alt-arrow-right-linear" width="16" className="text-slate-400" />
+              <iconify-icon icon="solar:alt-arrow-right-linear" width="16" className="text-slate-400 group-hover:text-slate-600 transition-colors" />
             </Link>
           </div>
         </div>
