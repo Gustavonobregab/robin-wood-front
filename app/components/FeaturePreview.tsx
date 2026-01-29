@@ -39,7 +39,7 @@ const features: { id: Feature; label: string; icon: React.ReactNode }[] = [
 export function FeaturePreview() {
   const [activeFeature, setActiveFeature] = useState<Feature>('text');
   const [text, setText] = useState(
-    'Robin Wood uses advanced semantic compression to reduce your data size while preserving meaning. Try it now by clicking the compress button to see the magic happen in real-time.'
+    'It is important to note that Robin Wood utilizes advanced semantic compression technology in order to drastically reduce the size of your message. Please be advised that due to the fact that we analyze sentence structure, we are able to remove any and all characters that serve no functional purpose. Consequently, at this point in time, you can optimize your application bandwidth without losing the original meaning for the purpose of maximum efficiency.'
   );
   const [compressedText, setCompressedText] = useState<string | null>(null);
   const [isCompressing, setIsCompressing] = useState(false);
@@ -49,13 +49,12 @@ export function FeaturePreview() {
     setIsCompressing(true);
     // Simulate compression
     setTimeout(() => {
-      const compressed = text
-        .split(' ')
-        .filter((_, i) => i % 3 !== 2)
-        .join(' ');
-      setCompressedText(compressed);
-      setIsCompressing(false);
-    }, 1500);
+    // 👇 AQUI: Coloque a string fixa que você quer que apareça
+    const fixedResult = "note: Robin Wood utilizes advanced semantic compression tech to drastically reduce the size of ur msg. note: bc we analyze sentence structure, we can remove all chars that r useless. Consequently, now, u can optimize ur app bandwidth w/o losing the orig meaning for max efficiency.";
+    
+    setCompressedText(fixedResult);
+    setIsCompressing(false);
+  }, 1500);
   };
 
   
