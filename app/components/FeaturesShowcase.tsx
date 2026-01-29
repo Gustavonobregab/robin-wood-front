@@ -41,11 +41,11 @@ function TextBeforeAfter() {
         <div className="flex items-center gap-2 text-xs font-mono text-slate-500 mb-3">
           <span>Before</span>
           <div className="h-px flex-1 bg-slate-200" />
-          <span className="text-slate-400">2.4KB</span>
+          <span className="text-slate-400">206B</span>
         </div>
         <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 h-[120px] flex items-center">
           <p className="text-sm text-slate-700 leading-relaxed">
-            Robin Wood uses advanced semantic compression technology to reduce your data size while preserving meaning. Our intelligent system analyzes sentence structure and removes redundant phrasing without losing the original intent.
+            Please be advised that in order to ensure the complete optimization of your data storage capabilities, it is absolutely necessary to remove any and all redundant characters that serve no functional purpose.
           </p>
         </div>
       </div>
@@ -54,11 +54,11 @@ function TextBeforeAfter() {
         <div className="flex items-center gap-2 text-xs font-mono text-slate-500 mb-3">
           <span>After</span>
           <div className="h-px flex-1 bg-slate-200" />
-          <span className="font-semibold">1.1KB (-54%)</span>
+          <span className="font-semibold">95B (-52.91%)</span>
         </div>
         <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 h-[120px] flex items-center">
           <p className="text-sm text-slate-700 leading-relaxed">
-            Robin Wood uses semantic compression to reduce data size while preserving meaning. Our system analyzes sentence structure and removes redundant phrasing without losing intent.
+            note: to ensure the opt of ur data storage caps, its need to remove all dup chars that r useless.
           </p>
         </div>
       </div>

@@ -13,6 +13,7 @@ import {
   IntegrationSection,
 } from './components';
 import { ProgressBar } from './components/';
+import { Testimonials } from './components/Testimonials';
 
 // Visual components for feature cards
 function SemanticTextVisual() {
@@ -86,6 +87,7 @@ export default function LandingPage() {
           <HeroSection />
           <ClientsStrip />
           <FeaturesShowcase />
+          <Testimonials />
           <IntegrationSection />
           <UseCasesSection />
           <PricingSection />
