@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: 'Robin Wood',
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body>
         {children}
+        <Toaster position="top-right" /> {/* <--- ADICIONE ISSO AQUI */}
       </body>
     </html>
   )
