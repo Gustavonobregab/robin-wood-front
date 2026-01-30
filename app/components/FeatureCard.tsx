@@ -23,7 +23,7 @@ export function FeatureCard({
     return (
       <div
         className={cn(
-          'md:col-span-2 md:row-span-2 bg-white rounded-[2.5rem] p-8 border border-neutral-200 overflow-hidden relative group hover:border-green-300 transition-all duration-300',
+          'md:col-span-2 md:row-span-2 bg-white rounded-[2.5rem] p-8 border border-slate-200 overflow-hidden relative group hover:border-slate-300 transition-all duration-300',
           className
         )}
       >
@@ -46,13 +46,13 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        'bg-white rounded-[2.5rem] p-6 border border-neutral-200 hover:border-green-300 transition-colors group',
+        'bg-white rounded-[2.5rem] p-6 border border-slate-200 hover:border-slate-300 transition-colors group',
         className
       )}
     >
       <iconify-icon
         icon={icon}
-        className="text-slate-400 group-hover:text-brand-primary-hover transition-colors text-3xl mb-4"
+        className="text-slate-400 group-hover:text-slate-600 transition-colors text-3xl mb-4"
       />
       <h3 className="font-jakarta font-medium text-lg text-slate-900 mb-1">{title}</h3>
       <p className="font-manrope text-sm text-slate-500">{description}</p>

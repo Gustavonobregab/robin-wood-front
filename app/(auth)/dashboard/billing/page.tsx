@@ -88,14 +88,14 @@ export default function BillingPage() {
                 key={plan.name}
                 className={`p-6 rounded-2xl border ${
                   plan.current
-                    ? 'bg-brand-primary-bg border-brand-primary-light'
-                    : 'bg-white border-neutral-200 hover:border-brand-primary-light transition-colors'
+                    ? 'bg-slate-50 border-slate-900'
+                    : 'bg-white border-slate-200 hover:border-slate-300 transition-colors'
                 }`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-jakarta font-semibold text-lg text-slate-900">{plan.name}</h3>
                   {plan.current && (
-                    <span className="px-2.5 py-1 rounded-lg text-xs font-semibold font-manrope bg-brand-primary text-white">
+                    <span className="px-2.5 py-1 rounded-lg text-xs font-semibold font-manrope bg-slate-900 text-white">
                       Current
                     </span>
                   )}
@@ -164,7 +164,7 @@ export default function BillingPage() {
               123 Tech Street<br />
               San Francisco, CA 94102
             </p>
-            <button className="font-manrope font-medium text-brand-primary-hover hover:text-brand-primary-dark mt-3 text-sm">
+            <button className="font-manrope font-medium text-slate-600 hover:text-slate-900 mt-3 text-sm">
               Edit address
             </button>
           </div>

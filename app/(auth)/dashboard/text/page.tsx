@@ -134,8 +134,8 @@ export default function TextCompressPage() {
                   {compressedResult && (
                      <div className="flex items-center gap-2">
                        <iconify-icon icon="solar:arrow-right-linear" className="text-slate-400" />
-                       <span className="text-sm font-medium text-brand">Result</span>
-                       <span className="bg-brand-muted text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand/20">
+                       <span className="text-sm font-medium text-slate-900">Result</span>
+                       <span className="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-300">
                          {metrics?.ratio} SAVED
                        </span>
                      </div>
@@ -153,7 +153,7 @@ export default function TextCompressPage() {
                         <textarea
                         readOnly
                         value={compressedResult}
-                        className="flex-1 w-full p-6 resize-none border-none outline-none font-mono text-sm text-slate-800 bg-brand-bg/50"
+                        className="flex-1 w-full p-6 resize-none border-none outline-none font-mono text-sm text-slate-800 bg-slate-50"
                         />
                     </div>
                  ) : (
@@ -222,16 +222,16 @@ export default function TextCompressPage() {
                     onClick={() => setSelectedStyle(style)}
                     className={`w-full text-left p-3 rounded-xl border transition-all ${
                       selectedStyle.id === style.id
-                        ? 'border-brand bg-brand-bg ring-1 ring-brand/20'
+                        ? 'border-slate-900 bg-slate-50 ring-1 ring-slate-900/10'
                         : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className={`font-medium text-sm ${selectedStyle.id === style.id ? 'text-brand-dark' : 'text-slate-900'}`}>
+                      <span className={`font-medium text-sm ${selectedStyle.id === style.id ? 'text-slate-900' : 'text-slate-900'}`}>
                         {style.name}
                       </span>
                       {selectedStyle.id === style.id && (
-                        <iconify-icon icon="solar:check-circle-bold" className="text-brand" />
+                        <iconify-icon icon="solar:check-circle-bold" className="text-slate-900" />
                       )}
                     </div>
                     <p className="text-xs text-slate-500">{style.description}</p>
@@ -255,12 +255,12 @@ export default function TextCompressPage() {
                           type="checkbox" 
                           checked={customOps.includes(op.id)}
                           onChange={() => toggleCustomOp(op.id)}
-                          className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-brand checked:bg-brand hover:border-brand/60"
+                          className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-slate-900 checked:bg-slate-900 hover:border-slate-400"
                         />
                         <iconify-icon icon="solar:check-read-linear" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" width="14" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-slate-900 group-hover:text-brand-dark transition-colors">{op.name}</p>
+                        <p className="text-sm font-medium text-slate-900 transition-colors">{op.name}</p>
                         <p className="text-xs text-slate-500">{op.desc}</p>
                       </div>
                     </label>

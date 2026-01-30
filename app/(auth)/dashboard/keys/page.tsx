@@ -83,9 +83,11 @@ export default function KeysPage() {
     }
   };
 
+  const MAX_ACTIVE_KEYS = 5;
   const activeKeys = apiKeys.filter((k) => k.status === 'active').length;
   const revokedKeys = apiKeys.filter((k) => k.status === 'revoked').length;
   const totalRequests = apiKeys.reduce((acc, k) => acc + (k.requestCount || 0), 0);
+  const hasReachedLimit = activeKeys >= MAX_ACTIVE_KEYS;
 
   return (
     <>
@@ -105,23 +107,18 @@ export default function KeysPage() {
             variant="black"
             icon={<iconify-icon icon="solar:add-circle-linear" width="18" />}
             onClick={() => setShowCreateModal(true)}
+            disabled={hasReachedLimit}
           >
             Create New Key
           </Button>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-4 rounded-2xl bg-white border border-slate-200">
             <h3 className="font-manrope text-sm font-medium text-slate-500 mb-2">Active Keys</h3>
             <div className="font-jakarta font-bold text-2xl text-slate-900">
               {isLoading ? '...' : activeKeys}
-            </div>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-slate-200">
-            <h3 className="font-manrope text-sm font-medium text-slate-500 mb-2">Total Requests</h3>
-            <div className="font-jakarta font-bold text-2xl text-slate-900">
-              {isLoading ? '...' : new Intl.NumberFormat('en-US', { notation: 'compact' }).format(totalRequests)}
             </div>
           </div>
           <div className="p-4 rounded-2xl bg-white border border-slate-200">
@@ -187,7 +184,7 @@ export default function KeysPage() {
                         title="Copy to clipboard"
                       >
                         {copiedKey === keyId ? (
-                          <iconify-icon icon="solar:check-circle-linear" width="16" className="text-brand" />
+                          <iconify-icon icon="solar:check-circle-linear" width="16" className="text-slate-900" />
                         ) : (
                           <iconify-icon icon="solar:copy-linear" width="16" />
                         )}

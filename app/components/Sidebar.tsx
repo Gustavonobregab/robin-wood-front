@@ -119,14 +119,14 @@ export function Sidebar() {
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-manrope text-sm',
                         isActive
-                          ? 'bg-brand-bg text-brand-dark font-medium'
+                          ? 'bg-slate-100 text-slate-900 font-medium'
                           : 'text-slate-600 hover:bg-slate-100'
                       )}
                     >
                       <iconify-icon icon={item.icon} width="20" />
                       {item.name}
                       {item.badge && (
-                        <span className="ml-auto px-2 py-0.5 rounded-full bg-brand text-white text-xs font-medium">
+                        <span className="ml-auto px-2 py-0.5 rounded-full bg-slate-900 text-white text-xs font-medium">
                           {item.badge}
                         </span>
                       )}

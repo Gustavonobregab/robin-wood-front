@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             'w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-sm',
             'placeholder:text-slate-400',
-            'focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all',
+            'focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             error && 'border-red-500 focus:ring-red-500/20 focus:border-red-500',
             className
@@ -81,7 +81,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           className={cn(
             'w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-sm resize-none',
             'placeholder:text-slate-400',
-            'focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all',
+            'focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             error && 'border-red-500 focus:ring-red-500/20 focus:border-red-500',
             className
@@ -131,7 +131,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             ref={ref}
             type="checkbox"
             id={checkboxId}
-            className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-brand checked:bg-brand hover:border-brand/60"
+            className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-slate-900 checked:bg-slate-900 hover:border-slate-400"
             {...props}
           />
           <svg
@@ -147,7 +147,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         {(label || description) && (
           <div className="flex-1">
             {label && (
-              <p className="text-sm font-medium text-slate-900 group-hover:text-brand-dark transition-colors">
+              <p className="text-sm font-medium text-slate-900">
                 {label}
               </p>
             )}

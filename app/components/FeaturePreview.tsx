@@ -119,7 +119,7 @@ export function FeaturePreview() {
                     setCompressedText(null)
                   }}
                   className="w-full h-40 p-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-sm resize-none
-                            focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
+                            focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-900 transition-all"
                   placeholder="Type or paste your text here..."
                 />
 
