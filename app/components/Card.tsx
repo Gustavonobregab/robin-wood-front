@@ -1,5 +1,5 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './cn';
 
 type CardVariant = 'default' | 'feature' | 'dark';
 

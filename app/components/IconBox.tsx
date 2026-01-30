@@ -1,5 +1,5 @@
 import { type HTMLAttributes } from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './cn';
 
 type IconBoxSize = 'sm' | 'md' | 'lg';
 

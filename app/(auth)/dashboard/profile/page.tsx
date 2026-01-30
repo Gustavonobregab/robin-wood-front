@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
 import { useProfile } from '../../../hooks/use-profile';
+import { updateProfile } from '../../../http/profile';
 import { toast } from 'sonner';
 
 export default function ProfilePage() {
@@ -21,15 +22,8 @@ export default function ProfilePage() {
     setIsSaving(true);
     
     try {
-      const res = await fetch('http://localhost:3000/users/me', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name })
-      });
-
-      if (!res.ok) throw new Error('Failed to update');
-
-      await mutate(); // Revalida os dados
+      await updateProfile({ name });
+      await mutate();
       toast.success('Profile updated successfully');
     } catch (err) {
       toast.error('Failed to update profile');

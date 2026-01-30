@@ -84,3 +84,22 @@ export interface UsageAnalytics {
 }
 
 export type UsageAnalyticsResponse = ApiResponse<UsageAnalytics>;
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  image?: string;
+  createdAt: string;
+  stats?: {
+    totalRequests: number;
+    tokensUsed: number;
+    tokensLimit: number;
+  };
+}
+
+export interface UpdateProfileInput {
+  name: string;
+}
+
+export type UserResponse = ApiResponse<User>;

@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { authClient } from '../http/auth-client';
+import { authClient } from '../http/login';
 
 const fetcher = async (url: string) => {
   const res = await fetch(url, {

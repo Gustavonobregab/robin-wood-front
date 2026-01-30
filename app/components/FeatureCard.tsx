@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './cn';
 import { IconBox } from './IconBox';
 
 interface FeatureCardProps {

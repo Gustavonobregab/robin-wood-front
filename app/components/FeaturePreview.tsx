@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cn } from '@/components/utils';
+import { cn } from './cn';
 import { CodeBlock } from './CodeBlock';
 
 type Feature = 'audio' | 'text' | 'api';
