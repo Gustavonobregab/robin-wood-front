@@ -20,6 +20,9 @@ export { List, ListItem, ListItemLink } from './ListItem';
 // Form Elements
 export { Input, Textarea, Checkbox } from './Input';
 
+// Modal
+export { Modal, ModalHeader, ModalContent, ModalFooter } from './Modal';
+
 // Badge
 export { Badge } from './Badge';
 

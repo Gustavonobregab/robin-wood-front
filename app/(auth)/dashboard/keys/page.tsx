@@ -1,54 +1,37 @@
 'use client';
 
 import Script from 'next/script';
-import { useState } from 'react';
-
-const apiKeys = [
-  {
-    id: 'key_1',
-    name: 'Production API Key',
-    prefix: 'rw_live_',
-    lastChars: '...x7Kp',
-    createdAt: '2024-01-15',
-    lastUsed: '2 minutes ago',
-    status: 'active',
-    requests: '456,789',
-  },
-  {
-    id: 'key_2',
-    name: 'Development Key',
-    prefix: 'rw_test_',
-    lastChars: '...m3Qs',
-    createdAt: '2024-02-20',
-    lastUsed: '1 hour ago',
-    status: 'active',
-    requests: '12,345',
-  },
-  {
-    id: 'key_3',
-    name: 'Staging Environment',
-    prefix: 'rw_test_',
-    lastChars: '...p9Lw',
-    createdAt: '2024-03-10',
-    lastUsed: '3 days ago',
-    status: 'active',
-    requests: '8,921',
-  },
-  {
-    id: 'key_4',
-    name: 'Old Production Key',
-    prefix: 'rw_live_',
-    lastChars: '...k2Rt',
-    createdAt: '2023-11-05',
-    lastUsed: '30 days ago',
-    status: 'revoked',
-    requests: '1,234,567',
-  },
-];
+import { useState, useEffect, useCallback } from 'react';
+import { getApiKeys } from '../../../http/keys';
+import { PageTitle, Label, SectionTitle, Button } from '@/app/components';
+import { CreateKeyModal } from '@/app/components/CreateKeyModal';
+import { toast } from 'sonner';
+import type { ApiKey } from '@/types';
 
 export default function KeysPage() {
+  const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [visibleKeys, setVisibleKeys] = useState<Set<string>>(new Set());
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const fetchApiKeys = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await getApiKeys();
+      setApiKeys(response.data.keys || []);
+    } catch (error) {
+      console.error('Error fetching API keys:', error);
+      toast.error('Failed to load API keys');
+      setApiKeys([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchApiKeys();
+  }, [fetchApiKeys]);
 
   const toggleKeyVisibility = (keyId: string) => {
     const newVisible = new Set(visibleKeys);
@@ -60,10 +43,28 @@ export default function KeysPage() {
     setVisibleKeys(newVisible);
   };
 
-  const copyToClipboard = (keyId: string) => {
-    setCopiedKey(keyId);
-    setTimeout(() => setCopiedKey(null), 2000);
+  const copyToClipboard = async (keyValue: string, keyId: string) => {
+    try {
+      await navigator.clipboard.writeText(keyValue);
+      setCopiedKey(keyId);
+      toast.success('API key copied to clipboard');
+      setTimeout(() => setCopiedKey(null), 2000);
+    } catch (err) {
+      toast.error('Failed to copy to clipboard');
+    }
   };
+
+  const handleKeyCreated = () => {
+    fetchApiKeys(); 
+  };
+
+  const closeCreateModal = () => {
+    setShowCreateModal(false);
+  };
+
+  const activeKeys = apiKeys.filter((k) => k.status === 'active').length;
+  const revokedKeys = apiKeys.filter((k) => k.status === 'revoked').length;
+  const totalRequests = apiKeys.reduce((acc, k) => acc + (k.requestCount || 0), 0);
 
   return (
     <>
@@ -76,98 +77,116 @@ export default function KeysPage() {
         {/* Header */}
         <div className="flex items-start justify-between">
           <div>
-            <p className="font-manrope text-sm text-slate-500 mb-1">API Management</p>
-            <h1 className="font-jakarta font-semibold text-4xl tracking-tight text-slate-900">API Keys</h1>
+            <Label>API Management</Label>
+            <PageTitle>API Keys</PageTitle>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-neutral-200 bg-white hover:bg-slate-50 transition-colors">
-            <iconify-icon icon="solar:add-circle-linear" width="18" className="text-slate-600" />
-            <span className="font-manrope text-sm font-medium text-slate-700">Create New Key</span>
-          </button>
+          <Button
+            variant="black"
+            icon={<iconify-icon icon="solar:add-circle-linear" width="18" />}
+            onClick={() => setShowCreateModal(true)}
+          >
+            Create New Key
+          </Button>
         </div>
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-2xl bg-white border border-neutral-200">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200">
             <h3 className="font-manrope text-sm font-medium text-slate-500 mb-2">Active Keys</h3>
-            <div className="font-jakarta font-bold text-2xl text-slate-900">3</div>
+            <div className="font-jakarta font-bold text-2xl text-slate-900">
+              {isLoading ? '...' : activeKeys}
+            </div>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-neutral-200">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200">
             <h3 className="font-manrope text-sm font-medium text-slate-500 mb-2">Total Requests</h3>
-            <div className="font-jakarta font-bold text-2xl text-slate-900">1.7M</div>
+            <div className="font-jakarta font-bold text-2xl text-slate-900">
+              {isLoading ? '...' : new Intl.NumberFormat('en-US', { notation: 'compact' }).format(totalRequests)}
+            </div>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-neutral-200">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200">
             <h3 className="font-manrope text-sm font-medium text-slate-500 mb-2">Revoked Keys</h3>
-            <div className="font-jakarta font-bold text-2xl text-slate-900">1</div>
+            <div className="font-jakarta font-bold text-2xl text-slate-900">
+              {isLoading ? '...' : revokedKeys}
+            </div>
           </div>
         </div>
 
         {/* API Keys List */}
         <div>
-          <h2 className="font-jakarta font-semibold text-xl text-slate-900 mb-3">Your API Keys</h2>
-          <div className="space-y-1">
-            {apiKeys.map((key) => (
-              <div
-                key={key.id}
-                className={`flex items-center gap-4 px-3 py-3 rounded-lg transition-colors ${
-                  key.status === 'revoked'
-                    ? 'opacity-60 hover:bg-slate-50'
-                    : 'hover:bg-slate-100 cursor-pointer'
-                }`}
-              >
-                <div className="flex-1 min-w-0">
-                  <p className="font-manrope text-sm font-medium text-slate-900 truncate">
-                    {key.name}
-                  </p>
-                  <p className="font-manrope text-xs text-slate-500 truncate">
-                    {visibleKeys.has(key.id)
-                      ? `${key.prefix}sk_xxxxxxxxxxxx${key.lastChars}`
-                      : `${key.prefix}sk_••••••••••••${key.lastChars}`}
-                    {' • '}
-                    <span
-                      className={`${
-                        key.status === 'active' ? 'text-brand-primary-dark' : 'text-slate-400'
-                      }`}
-                    >
-                      {key.status}
-                    </span>
-                    {' • '}
-                    Created {key.createdAt}
-                    {' • '}
-                    {key.requests} requests
-                  </p>
-                </div>
+          <SectionTitle className="mb-3">Your API Keys</SectionTitle>
+          
+          {isLoading ? (
+            <div className="text-center py-12 text-slate-500">Loading API keys...</div>
+          ) : apiKeys.length === 0 ? (
+            <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200">
+              <iconify-icon icon="solar:key-linear" width="48" className="text-slate-300 mb-4" />
+              <p className="font-manrope text-slate-600 mb-2">No API keys yet</p>
+              <p className="font-manrope text-sm text-slate-500">
+                Create your first API key to start using the Robin Wood API
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-1">
+              {apiKeys.map((key) => (
+                <div
+                  key={key.id}
+                  className={`flex items-center gap-4 px-3 py-3 rounded-lg transition-colors ${
+                    key.status === 'revoked'
+                      ? 'opacity-60 hover:bg-slate-50'
+                      : 'hover:bg-slate-100'
+                  }`}
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="font-manrope text-sm font-medium text-slate-900 truncate">
+                      {key.name}
+                    </p>
+                    <p className="font-manrope text-xs text-slate-500 truncate">
+                      {visibleKeys.has(key.id) ? key.key : key.key.replace(/[a-zA-Z0-9]/g, '•')}
+                      {' • '}
+                      <span className={key.status === 'active' ? 'text-brand' : 'text-slate-400'}>
+                        {key.status}
+                      </span>
+                      {' • '}
+                      Created {new Date(key.createdAt).toLocaleDateString()}
+                      {key.requestCount !== undefined && ` • ${new Intl.NumberFormat('en-US').format(key.requestCount)} requests`}
+                    </p>
+                  </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => toggleKeyVisibility(key.id)}
                     className="p-1.5 text-slate-400 hover:text-slate-900 transition-colors"
+                    title={visibleKeys.has(key.id) ? 'Hide key' : 'Show key'}
                   >
-                    {visibleKeys.has(key.id) ? (
-                      <iconify-icon icon="solar:eye-closed-linear" width="16" />
-                    ) : (
-                      <iconify-icon icon="solar:eye-linear" width="16" />
-                    )}
+                    <iconify-icon
+                      icon={visibleKeys.has(key.id) ? 'solar:eye-closed-linear' : 'solar:eye-linear'}
+                      width="16"
+                    />
                   </button>
                   <button
-                    onClick={() => copyToClipboard(key.id)}
+                    onClick={() => copyToClipboard(key.key, key.id)}
                     className="p-1.5 text-slate-400 hover:text-slate-900 transition-colors"
+                    title="Copy to clipboard"
                   >
                     {copiedKey === key.id ? (
-                      <iconify-icon icon="solar:check-circle-linear" width="16" className="text-brand-primary-hover" />
+                      <iconify-icon icon="solar:check-circle-linear" width="16" className="text-brand" />
                     ) : (
                       <iconify-icon icon="solar:copy-linear" width="16" />
                     )}
                   </button>
-                  {key.status === 'active' && (
-                    <button className="px-3 py-1.5 rounded-lg border border-red-200 bg-red-50 text-red-700 hover:bg-red-100 transition-colors font-manrope text-xs font-medium">
-                      Revoke
-                    </button>
-                  )}
                 </div>
-              </div>
-            ))}
-          </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Create Key Modal */}
+      <CreateKeyModal
+        open={showCreateModal}
+        onClose={closeCreateModal}
+        onSuccess={handleKeyCreated}
+      />
     </>
   );
 }

@@ -103,3 +103,32 @@ export interface UpdateProfileInput {
 }
 
 export type UserResponse = ApiResponse<User>;
+
+
+export interface ApiKey {
+  id: string;
+  key: string; 
+  name: string;
+  createdAt: string;
+  lastUsedAt?: string;
+  status: 'active' | 'revoked';
+  requestCount?: number;
+}
+
+export interface CreateKeyInput {
+  name: string;
+}
+
+export interface KeysListData {
+  keys: ApiKey[];
+}
+
+export type KeysListResponse = ApiResponse<KeysListData>;
+
+export type KeyResponse = ApiResponse<ApiKey | null>;
+
+export interface CreateKeyData {
+  key: string; 
+}
+
+export type CreateKeyResponse = ApiResponse<CreateKeyData>;
