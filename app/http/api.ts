@@ -13,11 +13,20 @@ export const clientApi = ky.create({
 });
 
 // --- TYPE DEFINITIONS ---
+
+export type TextOperationType = 'trim' | 'shorten' | 'minify' | 'compress' | 'json-to-toon';
+
+export interface TextOperation {
+  type: TextOperationType;
+  params?: Record<string, any>;
+}
+
 export type TextPreset = 'chill' | 'medium' | 'aggressive' | 'podcast';
 
 export interface ProcessTextInput {
   text: string;
-  preset?: TextPreset;
+  operations?: TextOperation[];
+  preset?: TextPreset; 
 }
 
 export interface ProcessTextResponse {
@@ -31,9 +40,41 @@ export interface ProcessTextResponse {
       charCount: number;
       originalCharCount: number;
     };
+    operations: string[];
   };
 }
 
-export const compressText = async (payload: ProcessTextInput): Promise<ProcessTextResponse> => {
+export const processText = async (payload: ProcessTextInput): Promise<ProcessTextResponse> => {
   return clientApi.post('text', { json: payload }).json();
+};
+
+export type TimeRange = '7d' | '30d' | '90d' | '1y';
+
+export interface UsageAnalytics {
+  stats: {
+    totalRequests: number;
+    tokensSaved: number;
+    tokensUsed: number;
+  };
+  chart: {
+    date: string;
+    requests: number;
+  }[];
+  breakdown: {
+    type: string;
+    count: number;
+    percentage: number;
+  }[];
+  recent: {
+    id: string;
+    type: string;
+    status: string;
+    size: string;
+    latency: string;
+    timestamp: string;
+  }[];
+}
+
+export const getUsageAnalytics = async (range: string = '30d'): Promise<{ data: UsageAnalytics }> => {
+  return clientApi.get(`usage/analytics?range=${range}`).json();
 };
