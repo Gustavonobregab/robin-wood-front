@@ -15,7 +15,6 @@ import {
 import { ProgressBar } from './components';
 import { Testimonials } from './components/Testimonials';
 
-// Visual components for feature cards
 function SemanticTextVisual() {
   return (
     <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-3">
@@ -87,7 +86,6 @@ export default function LandingPage() {
           <HeroSection />
           <ClientsStrip />
           <FeaturesShowcase />
-          <Testimonials />
           <IntegrationSection />
           <UseCasesSection />
           <PricingSection />

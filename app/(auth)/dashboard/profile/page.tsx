@@ -55,10 +55,10 @@ export default function ProfilePage() {
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Main Content: Personal Info */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-neutral-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-brand-primary-bg flex items-center justify-center">
-                  <iconify-icon icon="solar:user-linear" width="20" className="text-emerald-600" />
+                <div className="w-10 h-10 rounded-xl bg-brand-bg flex items-center justify-center">
+                  <iconify-icon icon="solar:user-linear" width="20" className="text-brand" />
                 </div>
                 <div>
                   <h3 className="font-jakarta font-semibold text-xl text-slate-900">Personal Information</h3>
@@ -74,7 +74,7 @@ export default function ProfilePage() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 bg-slate-50 focus:bg-white focus:border-emerald-500 focus:outline-none transition-colors font-manrope text-slate-900"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:border-brand focus:outline-none transition-colors font-manrope text-slate-900"
                   />
                 </div>
 
@@ -85,7 +85,7 @@ export default function ProfilePage() {
                     type="email"
                     value={user?.email || ''}
                     disabled
-                    className="w-full px-4 py-2.5 rounded-xl border border-neutral-200 bg-slate-100 text-slate-500 cursor-not-allowed font-manrope"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-500 cursor-not-allowed font-manrope"
                   />
                   <p className="text-xs text-slate-400 mt-1 ml-1">Email managed by Google Auth</p>
                 </div>
@@ -104,12 +104,12 @@ export default function ProfilePage() {
           {/* Sidebar: Stats & Avatar */}
           <div className="space-y-6">
             {/* Avatar Card */}
-            <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-neutral-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
               <div className="flex flex-col items-center text-center">
                 {user?.image ? (
                    <img src={user.image} alt="Profile" className="w-24 h-24 rounded-full mb-4 object-cover border-4 border-slate-50" />
                 ) : (
-                  <div className="w-24 h-24 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-jakarta font-semibold text-3xl mb-4">
+                  <div className="w-24 h-24 rounded-full bg-brand-muted flex items-center justify-center text-brand-dark font-jakarta font-semibold text-3xl mb-4">
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
                 )}
@@ -120,23 +120,23 @@ export default function ProfilePage() {
             </div>
 
             {/* Account Stats Card */}
-            <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-neutral-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
-                  <iconify-icon icon="solar:graph-up-linear" width="20" className="text-emerald-600" />
+                <div className="w-10 h-10 rounded-xl bg-brand-bg flex items-center justify-center">
+                  <iconify-icon icon="solar:graph-up-linear" width="20" className="text-brand" />
                 </div>
                 <h3 className="font-jakarta font-semibold text-xl text-slate-900">Usage Stats</h3>
               </div>
               
               <div className="space-y-4">
-                <div className="p-4 rounded-xl border border-neutral-200 bg-slate-50">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
                   <p className="font-manrope text-sm text-slate-500 mb-1">Member Since</p>
                   <p className="font-jakarta font-semibold text-slate-900">
                     {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : '-'}
                   </p>
                 </div>
                 
-                <div className="p-4 rounded-xl border border-neutral-200 bg-slate-50">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
                   <p className="font-manrope text-sm text-slate-500 mb-1">Total Requests</p>
                   <p className="font-jakarta font-semibold text-slate-900">
                     {/* Formatação compacta: 1.2k, 1M */}
@@ -144,7 +144,7 @@ export default function ProfilePage() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl border border-neutral-200 bg-slate-50">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
                   <p className="font-manrope text-sm text-slate-500 mb-1">Tokens Used</p>
                   <div className="flex items-center justify-between">
                     <p className="font-jakarta font-semibold text-slate-900">
@@ -155,7 +155,7 @@ export default function ProfilePage() {
                   {/* Barra de progresso de tokens */}
                   <div className="w-full h-1.5 bg-slate-200 rounded-full mt-2 overflow-hidden">
                     <div 
-                      className="h-full bg-emerald-500 rounded-full" 
+                      className="h-full bg-brand rounded-full" 
                       style={{ width: `${Math.min(100, ((user?.stats?.tokensUsed || 0) / (user?.stats?.tokensLimit || 1)) * 100)}%` }} 
                     />
                   </div>
@@ -164,15 +164,15 @@ export default function ProfilePage() {
             </div>
 
             {/* Danger Zone */}
-            <div className="bg-white rounded-[2.5rem] p-6 md:p-8 border border-red-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-300 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
-                  <iconify-icon icon="solar:danger-triangle-linear" width="20" className="text-red-600" />
+                <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center">
+                  <iconify-icon icon="solar:danger-triangle-linear" width="20" className="text-slate-600" />
                 </div>
                 <h3 className="font-jakarta font-semibold text-xl text-slate-900">Danger Zone</h3>
               </div>
               <div className="space-y-3">
-                <button className="w-full font-manrope font-medium bg-red-50 text-red-700 px-4 py-2.5 rounded-full hover:bg-red-100 transition-colors">
+                <button className="w-full font-manrope font-medium bg-slate-100 text-slate-700 px-4 py-2.5 rounded-full hover:bg-slate-200 transition-colors">
                   Delete Account
                 </button>
               </div>

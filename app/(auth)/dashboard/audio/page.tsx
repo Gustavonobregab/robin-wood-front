@@ -147,7 +147,7 @@ export default function AudioCompressPage() {
               onDragLeave={() => setIsDragging(false)}
               onDrop={handleDrop}
               className={`min-h-[500px] rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center p-8 relative overflow-hidden ${
-                isDragging ? 'border-emerald-400 bg-emerald-50' : 'border-neutral-200 bg-white'
+                isDragging ? 'border-brand bg-brand-bg' : 'border-slate-200 bg-white'
               }`}
             >
               {uploadedFile ? (
@@ -159,7 +159,7 @@ export default function AudioCompressPage() {
                   <p className="font-manrope text-sm text-slate-500 mb-8">{formatBytes(uploadedFile.size)}</p>
 
                   {/* Player Container */}
-                  <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-neutral-100">
+                  <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
                     <div className="flex flex-col gap-4">
                       {/* Original Player */}
                       <div className="flex items-center gap-3">
@@ -170,7 +170,7 @@ export default function AudioCompressPage() {
                       {/* Result Player (Only if processed) */}
                       {resultUrl && (
                         <div className="flex items-center gap-3 animate-fade-in">
-                           <span className="text-xs font-bold text-emerald-600 uppercase w-12 text-right">New</span>
+                           <span className="text-xs font-bold text-brand uppercase w-12 text-right">New</span>
                            <audio controls src={resultUrl} className="w-full h-8" />
                         </div>
                       )}
@@ -183,14 +183,14 @@ export default function AudioCompressPage() {
                        <>
                          <button 
                            onClick={() => { setUploadedFile(null); setPreviewUrl(null); setResultUrl(null); }}
-                           className="px-4 py-2.5 rounded-xl border border-neutral-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+                           className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors"
                          >
                            Reset
                          </button>
                          <a 
                            href={resultUrl} 
                            download={`processed_${uploadedFile.name}.mp3`}
-                           className="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200 flex items-center gap-2"
+                           className="px-6 py-2.5 rounded-xl bg-brand text-white font-medium hover:bg-brand-dark transition-colors shadow-lg shadow-brand-muted flex items-center gap-2"
                          >
                            <iconify-icon icon="solar:download-linear" />
                            Download MP3
@@ -215,7 +215,7 @@ export default function AudioCompressPage() {
 
                   {/* Metrics Badge */}
                   {metrics && (
-                    <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold animate-bounce-in">
+                    <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-brand-muted text-brand-darker rounded-full text-sm font-semibold animate-bounce-in">
                       <iconify-icon icon="solar:graph-down-linear" />
                       Reduced by {metrics.ratio} ({metrics.saved} saved)
                     </div>
@@ -241,7 +241,7 @@ export default function AudioCompressPage() {
 
           {/* RIGHT: Settings */}
           <div className="space-y-6">
-             <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm">
+             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="font-jakarta font-semibold text-slate-900 mb-4 flex items-center gap-2">
                 <iconify-icon icon="solar:tuning-2-linear" className="text-slate-400" />
                 Target Preset
@@ -253,18 +253,18 @@ export default function AudioCompressPage() {
                     onClick={() => setSelectedPreset(preset)}
                     className={`w-full text-left p-3 rounded-xl border transition-all flex items-start gap-3 ${
                       selectedPreset.id === preset.id
-                        ? 'border-red-500 bg-red-50/30 ring-1 ring-red-500/20'
-                        : 'border-neutral-200 hover:border-slate-300 hover:bg-slate-50'
+                        ? 'border-brand bg-brand-bg ring-1 ring-brand/20'
+                        : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
                     <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                        selectedPreset.id === preset.id ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-500'
+                        selectedPreset.id === preset.id ? 'bg-brand-muted text-brand' : 'bg-slate-100 text-slate-500'
                     }`}>
                         <iconify-icon icon={preset.icon} width="18" />
                     </div>
                     <div>
                         <div className="flex items-center gap-2">
-                            <span className={`font-medium text-sm ${selectedPreset.id === preset.id ? 'text-red-700' : 'text-slate-900'}`}>
+                            <span className={`font-medium text-sm ${selectedPreset.id === preset.id ? 'text-brand-dark' : 'text-slate-900'}`}>
                                 {preset.name}
                             </span>
                         </div>
@@ -277,7 +277,7 @@ export default function AudioCompressPage() {
 
             {/* Custom Ops */}
             {selectedPreset.id === 'custom' && (
-              <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm animate-fade-in">
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm animate-fade-in">
                 <h3 className="font-jakarta font-semibold text-slate-900 mb-4">Pipeline Operations</h3>
                 <div className="space-y-3">
                   {availableOperations.map((op) => (
@@ -289,12 +289,12 @@ export default function AudioCompressPage() {
                           onChange={() => {
                              setCustomOps(prev => prev.includes(op.id) ? prev.filter(id => id !== op.id) : [...prev, op.id])
                           }}
-                          className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-red-500 checked:bg-red-500 hover:border-red-400"
+                          className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-brand checked:bg-brand hover:border-brand/60"
                         />
                         <iconify-icon icon="solar:check-read-linear" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" width="14" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-slate-900 group-hover:text-red-700 transition-colors">{op.name}</p>
+                        <p className="text-sm font-medium text-slate-900 group-hover:text-brand-dark transition-colors">{op.name}</p>
                         <p className="text-xs text-slate-500">{op.desc}</p>
                       </div>
                     </label>

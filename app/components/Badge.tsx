@@ -1,7 +1,12 @@
 import { type HTMLAttributes, type ReactNode } from 'react';
 import { cn } from './cn';
 
-type BadgeVariant = 'status' | 'label' | 'size';
+// ============================================
+// BADGE COMPONENT
+// Status indicators and labels
+// ============================================
+
+type BadgeVariant = 'status' | 'label' | 'success' | 'muted';
 
 interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   variant?: BadgeVariant;
@@ -9,9 +14,10 @@ interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variants: Record<BadgeVariant, string> = {
-  status: 'bg-green-50 border border-green-100',
+  status: 'bg-brand-bg border border-brand-muted',
   label: 'bg-slate-100 text-slate-500',
-  size: 'bg-green-100 text-green-700',
+  success: 'bg-brand-muted text-brand-dark',
+  muted: 'bg-slate-100 text-slate-600',
 };
 
 export function Badge({ variant = 'label', className, children, ...props }: BadgeProps) {
@@ -26,8 +32,8 @@ export function Badge({ variant = 'label', className, children, ...props }: Badg
     >
       {variant === 'status' && (
         <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-light opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-brand" />
         </span>
       )}
       {children}

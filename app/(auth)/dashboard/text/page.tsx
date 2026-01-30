@@ -123,10 +123,10 @@ export default function TextCompressPage() {
           
           {/* LEFT COLUMN: INPUT / OUTPUT */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="min-h-[600px] rounded-2xl border border-neutral-200 bg-white flex flex-col shadow-sm overflow-hidden">
+            <div className="min-h-[600px] rounded-2xl border border-slate-200 bg-white flex flex-col shadow-sm overflow-hidden">
               
               {/* Toolbar */}
-              <div className="flex items-center justify-between border-b border-neutral-200 px-6 py-4 bg-slate-50/50">
+              <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-slate-50/50">
                 <div className="flex gap-4">
                   <span className={`text-sm font-medium ${!compressedResult ? 'text-slate-900' : 'text-slate-400'}`}>
                     Input
@@ -134,8 +134,8 @@ export default function TextCompressPage() {
                   {compressedResult && (
                      <div className="flex items-center gap-2">
                        <iconify-icon icon="solar:arrow-right-linear" className="text-slate-400" />
-                       <span className="text-sm font-medium text-emerald-600">Result</span>
-                       <span className="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                       <span className="text-sm font-medium text-brand">Result</span>
+                       <span className="bg-brand-muted text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-full border border-brand/20">
                          {metrics?.ratio} SAVED
                        </span>
                      </div>
@@ -153,7 +153,7 @@ export default function TextCompressPage() {
                         <textarea
                         readOnly
                         value={compressedResult}
-                        className="flex-1 w-full p-6 resize-none border-none outline-none font-mono text-sm text-slate-800 bg-emerald-50/20"
+                        className="flex-1 w-full p-6 resize-none border-none outline-none font-mono text-sm text-slate-800 bg-brand-bg/50"
                         />
                     </div>
                  ) : (
@@ -167,7 +167,7 @@ export default function TextCompressPage() {
               </div>
 
               {/* Bottom Action Bar */}
-              <div className="p-4 border-t border-neutral-200 bg-white flex justify-between items-center">
+              <div className="p-4 border-t border-slate-200 bg-white flex justify-between items-center">
                  {compressedResult ? (
                     <>
                       <button onClick={() => setCompressedResult(null)} className="text-sm font-medium text-slate-600 hover:text-slate-900 px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors">
@@ -210,7 +210,7 @@ export default function TextCompressPage() {
           <div className="space-y-6">
             
             {/* Style Selector */}
-            <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="font-jakarta font-semibold text-slate-900 mb-4 flex items-center gap-2">
                 <iconify-icon icon="solar:tuning-2-linear" className="text-slate-400" />
                 Compression Style
@@ -222,16 +222,16 @@ export default function TextCompressPage() {
                     onClick={() => setSelectedStyle(style)}
                     className={`w-full text-left p-3 rounded-xl border transition-all ${
                       selectedStyle.id === style.id
-                        ? 'border-emerald-500 bg-emerald-50/30 ring-1 ring-emerald-500/20'
-                        : 'border-neutral-200 hover:border-slate-300 hover:bg-slate-50'
+                        ? 'border-brand bg-brand-bg ring-1 ring-brand/20'
+                        : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className={`font-medium text-sm ${selectedStyle.id === style.id ? 'text-emerald-700' : 'text-slate-900'}`}>
+                      <span className={`font-medium text-sm ${selectedStyle.id === style.id ? 'text-brand-dark' : 'text-slate-900'}`}>
                         {style.name}
                       </span>
                       {selectedStyle.id === style.id && (
-                        <iconify-icon icon="solar:check-circle-bold" className="text-emerald-500" />
+                        <iconify-icon icon="solar:check-circle-bold" className="text-brand" />
                       )}
                     </div>
                     <p className="text-xs text-slate-500">{style.description}</p>
@@ -242,7 +242,7 @@ export default function TextCompressPage() {
 
             {/* Custom Operations (Visible ONLY if Custom is selected) */}
             {selectedStyle.id === 'custom' && (
-              <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm animate-fade-in">
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm animate-fade-in">
                 <h3 className="font-jakarta font-semibold text-slate-900 mb-4 flex items-center gap-2">
                   <iconify-icon icon="solar:settings-linear" className="text-slate-400" />
                   Active Operations
@@ -255,12 +255,12 @@ export default function TextCompressPage() {
                           type="checkbox" 
                           checked={customOps.includes(op.id)}
                           onChange={() => toggleCustomOp(op.id)}
-                          className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-emerald-500 checked:bg-emerald-500 hover:border-emerald-400"
+                          className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-slate-300 transition-all checked:border-brand checked:bg-brand hover:border-brand/60"
                         />
                         <iconify-icon icon="solar:check-read-linear" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100" width="14" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-slate-900 group-hover:text-emerald-700 transition-colors">{op.name}</p>
+                        <p className="text-sm font-medium text-slate-900 group-hover:text-brand-dark transition-colors">{op.name}</p>
                         <p className="text-xs text-slate-500">{op.desc}</p>
                       </div>
                     </label>
@@ -270,7 +270,7 @@ export default function TextCompressPage() {
             )}
 
             {/* Language Selector */}
-            <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="font-jakarta font-semibold text-slate-900 mb-4 flex items-center gap-2">
                  <iconify-icon icon="solar:global-linear" className="text-slate-400" />
                  Target Language

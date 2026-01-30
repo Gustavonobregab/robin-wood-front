@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { cn } from './cn';
 import { CodeBlock } from './CodeBlock';
+import { Button } from './Button';
 
 type Feature = 'audio' | 'text' | 'api';
 
@@ -118,7 +119,7 @@ export function FeaturePreview() {
                     setCompressedText(null)
                   }}
                   className="w-full h-40 p-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-sm resize-none
-                            focus:outline-none focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all"
+                            focus:outline-none focus:ring-2 focus:ring-brand/20 focus:border-brand transition-all"
                   placeholder="Type or paste your text here..."
                 />
 
@@ -138,7 +139,7 @@ export function FeaturePreview() {
 
                 <div className="w-full h-40 p-4 bg-slate-50 border border-slate-200 rounded-xl text-sm overflow-auto">
                   {isCompressing ? (
-                    <div className="flex items-center justify-center h-full gap-2 text-green-600">
+                    <div className="flex items-center justify-center h-full gap-2 text-brand">
                       <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor"
@@ -160,7 +161,7 @@ export function FeaturePreview() {
                     <span className="text-slate-400">
                       {compressedText.length} characters
                     </span>
-                    <span className="text-green-600 font-semibold">
+                    <span className="text-brand font-semibold">
                       {Math.round((1 - compressedText.length / text.length) * 100)}% smaller
                     </span>
                   </div>
@@ -170,15 +171,14 @@ export function FeaturePreview() {
 
             {/* BUTTON */}
             <div className="mt-6 flex justify-center">
-              <button
+              <Button
+                variant="green"
+                size="lg"
                 onClick={handleTextCompress}
                 disabled={isCompressing || !text}
-                className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-full font-semibold
-                          hover:bg-green-500 transition-all shadow-[0_0_20px_rgba(22,163,74,0.3)]
-                          hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
               >
                 {isCompressing ? 'Compressing…' : 'Compress'}
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -211,7 +211,7 @@ export function FeaturePreview() {
                 </label>
                 <div className="flex flex-col items-center justify-center h-40">
                   {isCompressing ? (
-                    <div className="flex items-center gap-2 text-green-600">
+                    <div className="flex items-center gap-2 text-brand">
                       <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor"
@@ -221,11 +221,11 @@ export function FeaturePreview() {
                     </div>
                   ) : audioCompressed ? (
                     <>
-                      <svg className="w-10 h-10 mb-3 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-10 h-10 mb-3 text-brand-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                       </svg>
-                      <p className="text-sm text-green-700 font-medium">medical-audio_compressed.mp3</p>
-                      <p className="text-xs text-green-600 mt-1">960 KB • <span className="font-semibold">60% smaller</span></p>
+                      <p className="text-sm text-brand-dark font-medium">medical-audio_compressed.mp3</p>
+                      <p className="text-xs text-brand mt-1">960 KB • <span className="font-semibold">60% smaller</span></p>
                     </>
                   ) : (
                     <p className="text-slate-400 italic text-sm">
@@ -238,7 +238,9 @@ export function FeaturePreview() {
 
             {/* BUTTON */}
             <div className="mt-6 flex justify-center">
-              <button
+              <Button
+                variant="green"
+                size="lg"
                 onClick={() => {
                   if (!audioCompressed) {
                     setIsCompressing(true);
@@ -249,12 +251,9 @@ export function FeaturePreview() {
                   }
                 }}
                 disabled={isCompressing || audioCompressed}
-                className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-full font-semibold
-                          hover:bg-green-500 transition-all shadow-[0_0_20px_rgba(22,163,74,0.3)]
-                          hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
               >
                 {isCompressing ? 'Compressing…' : audioCompressed ? 'Compressed' : 'Compress Audio'}
-              </button>
+              </Button>
             </div>
           </div>
         )}
@@ -270,7 +269,7 @@ export function FeaturePreview() {
       {/* FOOTER - Outside the card, in the border area */}
       <div className="mt-2 flex justify-center">
         <span className="text-xs text-slate-500">
-          Powered by <span className="font-semibold text-brand-primary-dark">
+          Powered by <span className="font-semibold text-brand-dark">
             Robin Wood Compression Engine
           </span>
         </span>

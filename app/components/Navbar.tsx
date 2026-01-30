@@ -14,7 +14,7 @@ export function Navbar({ className }: NavbarProps) {
       <div className="flex items-center gap-4">
         <Button variant="ghost">Documentation</Button>
         <Link href="/login">
-          <Button variant="primary" size="md">Get API Key</Button>
+          <Button variant="black" size="md">Get API Key</Button>
         </Link>
       </div>
     </div>

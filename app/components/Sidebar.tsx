@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from './cn';
 import { useState } from 'react';
-// import { useProfile } from '../hooks/use-profile';
 
-// 👈 2. Defina a interface para corrigir o erro do "item"
 interface NavItem {
   name: string;
   href: string;
@@ -23,15 +21,12 @@ const playgroundItems: NavItem[] = [
 
 const managementItems: NavItem[] = [
   { name: 'API Keys', href: '/dashboard/keys', icon: 'solar:key-linear' },
-  // { name: 'Usage', href: '/dashboard/usage', icon: 'solar:graph-up-linear' },
   { name: 'Billing', href: '/dashboard/billing', icon: 'solar:wallet-money-linear' },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  // const { user, isLoading } = useProfile(); // commented out with profile section
 
   return (
     <>
@@ -43,7 +38,7 @@ export function Sidebar() {
       {/* Mobile menu button */}
       <button
         type="button"
-        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-white border border-neutral-200 shadow-sm hover:bg-slate-50 transition-colors"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl bg-white border border-slate-200 shadow-sm hover:bg-slate-50 transition-colors"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
         <iconify-icon
@@ -64,7 +59,7 @@ export function Sidebar() {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-white border-r border-neutral-200',
+          'fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-white border-r border-slate-200',
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         )}
       >
@@ -79,7 +74,7 @@ export function Sidebar() {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-manrope text-sm',
                   pathname === '/dashboard'
-                    ? 'bg-brand-primary-bg text-brand-primary-dark font-medium'
+                    ? 'bg-brand-bg text-brand-dark font-medium'
                     : 'text-slate-600 hover:bg-slate-100'
                 )}
               >
@@ -108,7 +103,7 @@ export function Sidebar() {
                         <iconify-icon icon={item.icon} width="20" />
                         {item.name}
                         {item.badge && (
-                          <span className="ml-auto px-2 py-0.5 rounded-full bg-brand-primary text-white text-xs font-medium">
+                          <span className="ml-auto px-2 py-0.5 rounded-full bg-brand text-white text-xs font-medium">
                             {item.badge}
                           </span>
                         )}
@@ -124,14 +119,14 @@ export function Sidebar() {
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-manrope text-sm',
                         isActive
-                          ? 'bg-brand-primary-bg text-brand-primary-dark font-medium'
+                          ? 'bg-brand-bg text-brand-dark font-medium'
                           : 'text-slate-600 hover:bg-slate-100'
                       )}
                     >
                       <iconify-icon icon={item.icon} width="20" />
                       {item.name}
                       {item.badge && (
-                        <span className="ml-auto px-2 py-0.5 rounded-full bg-brand-primary text-white text-xs font-medium">
+                        <span className="ml-auto px-2 py-0.5 rounded-full bg-brand text-white text-xs font-medium">
                           {item.badge}
                         </span>
                       )}
@@ -157,7 +152,7 @@ export function Sidebar() {
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-manrope text-sm',
                         isActive
-                          ? 'bg-brand-primary-bg text-brand-primary-dark font-medium'
+                          ? 'bg-brand-bg text-brand-dark font-medium'
                           : 'text-slate-600 hover:bg-slate-100'
                       )}
                     >
@@ -169,43 +164,6 @@ export function Sidebar() {
               </div>
             </div>
           </nav>
-
-          {/* User Profile - commented out for now */}
-          {/* <div className="p-4 border-t border-neutral-100">
-            <Link
-              href="/dashboard/profile"
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-100 transition-colors group"
-            >
-              <div className="w-8 h-8 rounded-full bg-brand-primary-bg flex items-center justify-center overflow-hidden border border-neutral-100 group-hover:border-neutral-300 transition-colors">
-                 {isLoading ? (
-                    <div className="w-full h-full bg-slate-200 animate-pulse" />
-                 ) : user?.image ? (
-                    <img src={user.image} alt={user.name} className="w-full h-full object-cover" />
-                 ) : (
-                    <iconify-icon icon="solar:user-linear" width="18" className="text-brand-primary" />
-                 )}
-              </div>
-              
-              <div className="flex-1 min-w-0">
-                {isLoading ? (
-                    <div className="space-y-1">
-                        <div className="h-3 w-20 bg-slate-200 rounded animate-pulse" />
-                        <div className="h-2 w-12 bg-slate-200 rounded animate-pulse" />
-                    </div>
-                ) : (
-                    <>
-                        <p className="font-manrope text-sm font-medium text-slate-900 truncate">
-                            {user?.name || 'User'}
-                        </p>
-                        <p className="font-manrope text-xs text-slate-500 truncate">
-                            {user?.email || 'Free Plan'}
-                        </p>
-                    </>
-                )}
-              </div>
-              <iconify-icon icon="solar:alt-arrow-right-linear" width="16" className="text-slate-400 group-hover:text-slate-600 transition-colors" />
-            </Link>
-          </div> */}
         </div>
       </aside>
     </>

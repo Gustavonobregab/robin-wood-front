@@ -104,7 +104,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-2">
             <span className="font-manrope text-sm text-slate-500">Have a question?</span>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-neutral-200 bg-white hover:bg-slate-50 transition-colors">
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors">
               <iconify-icon icon="solar:chat-round-linear" width="18" className="text-slate-600" />
               <span className="font-manrope text-sm font-medium text-slate-700">Talk to us</span>
             </button>
