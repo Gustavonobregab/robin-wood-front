@@ -12,7 +12,7 @@ import {
   UseCasesSection,
   IntegrationSection,
 } from './components';
-import { ProgressBar } from './components/';
+import { ProgressBar } from './components';
 import { Testimonials } from './components/Testimonials';
 
 // Visual components for feature cards

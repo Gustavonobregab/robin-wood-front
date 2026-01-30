@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useState } from 'react';
 import useSWR from 'swr'; // Instale: bun add swr
-import { getUsageAnalytics } from '../../../http/api';
+import { getUsageAnalytics } from '../../../http/usage';
 import { toast } from 'sonner';
 
 const timeRanges = [

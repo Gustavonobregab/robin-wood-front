@@ -1,4 +1,4 @@
-import { cn } from '@/components/utils';
+import { cn } from './cn';
 
 type ProgressVariant = 'horizontal' | 'vertical';
 

@@ -4,10 +4,10 @@ import Script from 'next/script';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import useSWRMutation from 'swr/mutation';
-import { processAudio, type AudioPreset, type AudioOperation } from '../../../http/api';
+import { processAudio } from '../../../http/audio';
+import type { AudioPreset, AudioOperation } from '@/types';
 import { toast } from 'sonner';
 
-// Mapeamento dos Presets da API para UI
 const audioPresets = [
   { id: 'podcast', name: 'Podcast', description: 'Voice optimized, removes silence.', icon: 'solar:microphone-3-linear' },
   { id: 'lecture', name: 'Lecture', description: '1.5x speed + Cleanup.', icon: 'solar:book-2-linear' },
@@ -25,7 +25,6 @@ const availableOperations = [
 ];
 
 export default function AudioCompressPage() {
-  // --- STATE ---
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
@@ -37,7 +36,6 @@ export default function AudioCompressPage() {
   const [metrics, setMetrics] = useState<{ saved: string; ratio: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // --- API HOOK ---
   const { trigger, isMutating } = useSWRMutation(
     '/audio',
     async (_, { arg }: { arg: { file: File; preset: string; ops: AudioOperation[] } }) => {
@@ -53,11 +51,9 @@ export default function AudioCompressPage() {
       return;
     }
     setUploadedFile(file);
-    // Cria URL para preview local
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
     
-    // Reset results
     setResultUrl(null);
     setMetrics(null);
   };
@@ -73,7 +69,6 @@ export default function AudioCompressPage() {
   const handleProcess = async () => {
     if (!uploadedFile) return;
 
-    // Prepara operações
     let ops: AudioOperation[] = [];
     if (selectedPreset.id === 'custom') {
       ops = customOps.map(id => {
@@ -89,8 +84,6 @@ export default function AudioCompressPage() {
         ops
       });
 
-      // O Backend retorna um Buffer serializado em JSON { type: 'Buffer', data: [...] }
-      // Precisamos converter de volta para Blob para tocar/baixar
       const bufferData = new Uint8Array(result.data.file.data);
       const blob = new Blob([bufferData], { type: 'audio/mp3' });
       const url = URL.createObjectURL(blob);
@@ -116,7 +109,6 @@ export default function AudioCompressPage() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   };
 
-  // Cleanup URLs on unmount
   useEffect(() => {
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);

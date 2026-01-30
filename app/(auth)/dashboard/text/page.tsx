@@ -4,7 +4,8 @@ import Script from 'next/script';
 import Link from 'next/link';
 import { useState } from 'react';
 import useSWRMutation from 'swr/mutation';
-import { processText, type TextOperation, type TextOperationType } from '../../../http/api';
+import { processText } from '../../../http/text';
+import type { TextOperation, TextOperationType } from '@/types';
 import { toast } from 'sonner';
 
 // Definição dos Estilos (Presets Visuais do Front)
