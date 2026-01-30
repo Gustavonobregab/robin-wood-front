@@ -65,10 +65,6 @@ export const CardContent = forwardRef<HTMLDivElement, CardHeaderProps>(
 );
 CardContent.displayName = 'CardContent';
 
-// ============================================
-// FEATURE CARD - Grid card for features
-// Based on dashboard grid: bg-slate-100 hover:bg-slate-200/80
-// ============================================
 
 interface FeatureGridCardProps {
   href: string;
@@ -160,10 +156,6 @@ export const SettingsCard = forwardRef<HTMLButtonElement, SettingsCardProps>(
 );
 SettingsCard.displayName = 'SettingsCard';
 
-// ============================================
-// UPLOAD CARD - Drag & drop upload area
-// Based on audio page upload zone
-// ============================================
 
 interface UploadCardProps extends HTMLAttributes<HTMLDivElement> {
   isDragging?: boolean;

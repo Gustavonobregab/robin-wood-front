@@ -128,7 +128,7 @@ export type KeysListResponse = ApiResponse<KeysListData>;
 export type KeyResponse = ApiResponse<ApiKey | null>;
 
 export interface CreateKeyData {
-  key: string; 
+  key: string | ApiKey; 
 }
 
 export type CreateKeyResponse = ApiResponse<CreateKeyData>;

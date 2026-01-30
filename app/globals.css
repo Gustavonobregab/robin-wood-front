@@ -9,9 +9,7 @@
     @apply bg-slate-50 font-manrope text-slate-900 antialiased;
   }
 
-  ::selection {
-    @apply bg-brand-muted text-brand-dark;
-  }
+  
 }
 
 @layer utilities {

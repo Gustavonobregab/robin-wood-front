@@ -22,6 +22,7 @@ export { Input, Textarea, Checkbox } from './Input';
 
 // Modal
 export { Modal, ModalHeader, ModalContent, ModalFooter } from './Modal';
+export { ConfirmModal } from './ConfirmModal';
 
 // Badge
 export { Badge } from './Badge';

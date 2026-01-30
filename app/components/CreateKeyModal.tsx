@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 interface CreateKeyModalProps {
   open: boolean;
   onClose: () => void;
-  onSuccess: () => void; // Callback when key is created successfully
+  onSuccess: () => void;
 }
 
 export function CreateKeyModal({ open, onClose, onSuccess }: CreateKeyModalProps) {
@@ -32,7 +32,9 @@ export function CreateKeyModal({ open, onClose, onSuccess }: CreateKeyModalProps
     setIsCreating(true);
     try {
       const response = await createApiKey({ name: keyName });
-      setCreatedKey(response.data.key);
+      const keyData = response.data.key;
+      const keyString = typeof keyData === 'string' ? keyData : keyData.key;
+      setCreatedKey(keyString);
       onSuccess();
       toast.success('API key created successfully');
     } catch (err) {
@@ -80,12 +82,7 @@ export function CreateKeyModal({ open, onClose, onSuccess }: CreateKeyModalProps
               <p className="font-mono text-sm text-slate-900 break-all">{createdKey}</p>
             </div>
 
-            <div className="bg-brand-bg border border-brand/20 rounded-xl p-3">
-              <p className="text-xs text-brand-dark">
-                <iconify-icon icon="solar:info-circle-bold" width="14" className="inline mr-1" />
-                This is the only time you'll see the full key. Store it securely.
-              </p>
-            </div>
+            
           </ModalContent>
 
           <ModalFooter>
